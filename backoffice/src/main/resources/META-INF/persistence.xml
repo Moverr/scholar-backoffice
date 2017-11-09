@@ -19,7 +19,7 @@
     <class>myproperty._entities.SubscriptionPermission</class>
     <class>myproperty._entities.Reviews</class>-->
     <!--    <class>myproperty._entities.User</class>-->
-<!--    <class>myproperty.v1._entities.Contacts_1</class>-->
+    <!--    <class>myproperty.v1._entities.Contacts_1</class>-->
     <class>myproperty.v1.db._entities.Address</class>
     <class>myproperty.v1.db._entities.Packages</class>
     <class>myproperty.v1.db._entities.Contacts</class>
@@ -35,7 +35,15 @@
     <class>myproperty.v1.db._entities.Roles</class>
     <class>myproperty.v1.db._entities.UserRole</class>
     <class>myproperty.v1.db._entities.Permissions</class>
-
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.Person</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.Permissions</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.RolePermission</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.Contacts</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.Users</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.Addresses</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.UserRole</class>
+    <class>com.codemovers.scholar.v1.backoffice.db.entities.Roles</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
