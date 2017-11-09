@@ -148,7 +148,16 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.Person[ id=" + id + " ]";
+        return this.getClass()
+                + "{"
+                + "id=" + id
+                + ", firstName=" + firstName
+                + ", lastName=" + lastName
+                + ", gender=" + gender
+                + ", maritalStatus=" + maritalStatus
+                + ", image=" + image
+                + ", usersCollection=" + usersCollection
+                + "}";
     }
-    
+
 }

@@ -145,7 +145,15 @@ public class GeneralAccounts implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", accountType=" + accountType
+                + ", status=" + status
+                + ", externalid=" + externalid
+                + ", dateCreated=" + dateCreated
+                + ", usersCollection=" + usersCollection
+                + "}";
     }
-    
+
 }

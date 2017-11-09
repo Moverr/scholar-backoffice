@@ -149,7 +149,16 @@ public class Addresses implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.Addresses[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", parentId=" + parentId
+                + ", parentType=" + parentType
+                + ", addressType=" + addressType
+                + ", details=" + details
+                + ", status=" + status
+                + ", dateCreated=" + dateCreated
+                + "}";
     }
-    
+
 }

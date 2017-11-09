@@ -97,7 +97,12 @@ public class RolePermission implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.RolePermission[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", roleId=" + roleId
+                + ", permissionId=" + permissionId
+                + "}";
     }
-    
+
 }

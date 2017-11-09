@@ -134,7 +134,15 @@ public class Contacts implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.Contacts[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", parentType=" + parentType
+                + ", parentId=" + parentId
+                + ", contactType=" + contactType
+                + ", details=" + details
+                + ", status=" + status
+                + "}";
     }
-    
+
 }

@@ -96,7 +96,12 @@ public class UserRole implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.UserRole[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", userId=" + userId
+                + ", roleId=" + roleId
+                + "}";
     }
-    
+
 }

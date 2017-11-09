@@ -163,7 +163,17 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.Users[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", username=" + username
+                + ", password=" + password
+                + ", dateCreated=" + dateCreated
+                + ", status=" + status
+                + ", userRoleCollection=" + userRoleCollection
+                + ", accountId=" + accountId
+                + ", personId=" + personId
+                + "}";
     }
-    
+
 }

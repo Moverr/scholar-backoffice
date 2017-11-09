@@ -166,15 +166,23 @@ public class Roles implements Serializable {
             return false;
         }
         Roles other = (Roles) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
-        return "com.codemovers.scholar.v1.backoffice.db.entities.Roles[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", name=" + name
+                + ", code=" + code
+                + ", description=" + description
+                + ", isSystem=" + isSystem
+                + ", dateCreated=" + dateCreated
+                + ", authorId=" + authorId
+                + ", userRoleCollection=" + userRoleCollection
+                + ", rolePermissionCollection=" + rolePermissionCollection
+                + "}";
     }
-    
+
 }
