@@ -2,7 +2,6 @@ package com.codemovers.scholar.backoffice.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,22 +14,20 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by mover on 5/1/2017.
  */
 public class utilities {
 
-    public   static final String DATE_FORMAT = "dd/MMM/yyyy";
-    public   static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
+    public static final String DATE_FORMAT = "dd/MMM/yyyy";
+    public static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
 
-    private  static final Logger LOG = Logger.getLogger(utilities.class.getName());
-    private  static final Calendar CALENDAR = Calendar.getInstance(DEFAULT_LOCALE);
-    public   static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private  static final Random RANDOM = new Random();
-
-
-
+    private static final Logger LOG = Logger.getLogger(utilities.class.getName());
+    private static final Calendar CALENDAR = Calendar.getInstance(DEFAULT_LOCALE);
+    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final Random RANDOM = new Random();
 
     public static String getRandomNum(int numLength) {
         String SALTCHARS = "123456789";
@@ -91,9 +88,6 @@ public class utilities {
 
         return stringWriter.getBuffer().toString();
     }
-
-
-
 
     public static byte[] readAllFromInputstream(InputStream is, long size) {
         byte[] bytes;
@@ -161,9 +155,6 @@ public class utilities {
         }
 
     }
-
-
-
 
     public static BufferedImage resizeImages(BufferedImage img, int newW, int newH) {
         Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
@@ -267,9 +258,6 @@ public class utilities {
         LOG.log(Level.INFO, "{0} :: RequestURL: {1}", new Object[]{logId, httpServletRequest.getRequestURL()});
     }
 
-
-
-
     public static String getUsername(String authentication) {
         if (authentication == null) {
             return null;
@@ -287,9 +275,6 @@ public class utilities {
         }
         return parts[1];
     }
-
-
-
 
     public static String getLogId() {
         return String.valueOf(Math.abs(RANDOM.nextLong()));
@@ -328,9 +313,6 @@ public class utilities {
         return intPart >= 0 ? intPart + decimals : intPart - decimals;
     }
 
-
-
-
     public static String stringReplace(String word, String stringToBeReplaced, String stringToReplace) {
 
         return word.replace(stringToBeReplaced, stringToReplace);
@@ -338,32 +320,30 @@ public class utilities {
     }
 
 
-/*
+    /*
 Using SHA-256 :
- */
+     */
 //TODO: add salt to the pasword to increase the security
-    public static String encryptPassword_md5(String password){
+    public static String encryptPassword_md5(String password) {
 
-        StringBuilder   sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         try {
-            if(password.length() <= 4 )
+            if (password.length() <= 4) {
                 return null;
+            }
 
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(password.getBytes("UTF-8"));
 
             byte[] bytes = md.digest();
 
-
-            for(int i = 0; i < bytes.length; i ++){
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
 
-        //    return sb.toString();
-
-        }
-        catch (Exception em){
-            LOG.log(Level.WARNING,"Could not generate a message Digest : 0001");
+            //    return sb.toString();
+        } catch (Exception em) {
+            LOG.log(Level.WARNING, "Could not generate a message Digest : 0001");
         }
 
         return sb.toString();
@@ -377,13 +357,9 @@ Using SHA-256 :
 
     }
 
-
     public static Boolean validate_email(String EmailAddress) {
         EmailValidator validator = new EmailValidator();
         return validator.validate(EmailAddress);
     }
-
-
-
 
 }

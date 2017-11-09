@@ -1,15 +1,12 @@
-package myproperty.v1.helper.exception;
+package com.codemovers.scholar.backoffice.helper.exception;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
  * @author mover
  */
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BadRequestException extends RuntimeException {
 
     private static final Logger LOG = Logger.getLogger(BadRequestException.class.getName());

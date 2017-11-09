@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myproperty.v1.helper;
+package com.codemovers.scholar.backoffice.helper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

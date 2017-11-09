@@ -1,14 +1,11 @@
-package myproperty.v1.helper.exception;
+package com.codemovers.scholar.backoffice.helper.exception;
 
 import java.util.Objects;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
  * @author mover
  */
-@ResponseStatus(value = HttpStatus.OK)
 public class Message {
 
     private String message;
@@ -19,7 +16,7 @@ public class Message {
     public Message(String message) {
         this.message = message;
     }
-    
+
     public String getMessage() {
         return message;
     }
@@ -55,10 +52,10 @@ public class Message {
 
     @Override
     public String toString() {
-        return this.getClass().getCanonicalName()+ 
-                "[" +
-                "message=" + message +
-                "]";
+        return this.getClass().getCanonicalName()
+                + "["
+                + "message=" + message
+                + "]";
     }
-    
+
 }
