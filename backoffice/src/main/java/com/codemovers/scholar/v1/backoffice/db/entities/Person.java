@@ -148,7 +148,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return this.getClass()
+        return this.getClass().getCanonicalName()
                 + "{"
                 + "id=" + id
                 + ", firstName=" + firstName
