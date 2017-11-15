@@ -10,11 +10,11 @@ package com.codemovers.scholar.v1.backoffice.api.v1.account.entities.enums;
  * @author MOVER 11/5/2017
  */
 public enum accountTypes {
-    INVALID(0, "INVALID"),
-    PERSON(1, "PERSON"),
-    ORGANISATION(2, "ORGANISATION"),
-    COMPANY(3, "COMPANY"),
-    SCHOLAR(4, "SCHOLAR");
+    INVALID(0, "INVALID", "invalid"),
+    PERSON(1, "PERSON", "person"),
+    ORGANISATION(2, "ORGANISATION", "organisation"),
+    COMPANY(3, "COMPANY", "company"),
+    SCHOLAR(4, "SCHOLAR", "scholar");
 
     private final Integer id;
     private final String code;
