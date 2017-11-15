@@ -28,8 +28,4 @@ public abstract class AbstractEndpoint<T> {
 
 
 
-
-
-
-
 }
