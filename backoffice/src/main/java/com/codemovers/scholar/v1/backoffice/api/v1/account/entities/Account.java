@@ -18,7 +18,7 @@ public class Account {
     private String ACCOUNTTYPE;
     //THIS CAN BE AN EMAIL
     private String USERNAME;
-    private string PASSWORD;
+    private String PASSWORD;
     private String EMAILADDRESS;
 
     //
@@ -43,13 +43,14 @@ public class Account {
         this.USERNAME = USERNAME;
     }
 
-    public string getPASSWORD() {
+    public String getPASSWORD() {
         return PASSWORD;
     }
 
-    public void setPASSWORD(string PASSWORD) {
+    public void setPASSWORD(String PASSWORD) {
         this.PASSWORD = PASSWORD;
     }
+
 
     public String getEMAILADDRESS() {
         return EMAILADDRESS;
