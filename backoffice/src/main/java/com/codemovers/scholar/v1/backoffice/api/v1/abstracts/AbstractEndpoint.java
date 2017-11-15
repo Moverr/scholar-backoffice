@@ -13,4 +13,23 @@ public abstract class AbstractEndpoint<T> {
 
     private final Class<T> AbstractEndpoint;
 
+    public AbstractEndpoint(Class<T> AbstractEndpoint) {
+        this.AbstractEndpoint = AbstractEndpoint;
+    }
+
+    public abstract Class<T> create(T entity);
+
+    public abstract Class<T> update(T entity);
+
+    public abstract Class<T> archive(T entity);
+
+    public abstract Class<T> delete(T entity);
+
+
+
+
+
+
+
+
 }
