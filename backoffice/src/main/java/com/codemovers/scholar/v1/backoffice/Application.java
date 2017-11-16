@@ -5,8 +5,8 @@
  */
 package com.codemovers.scholar.v1.backoffice;
 
-import com.awamo.microservice.processengine.helper.logfilters.LogInputRequestFilter;
-import com.awamo.microservice.processengine.helper.logfilters.LogOutputResponseFilter;
+import com.codemovers.scholar.v1.backoffice.helper.logfilters.LogInputRequestFilter;
+import com.codemovers.scholar.v1.backoffice.helper.logfilters.LogOutputResponseFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eclipse.jetty.server.Server;
