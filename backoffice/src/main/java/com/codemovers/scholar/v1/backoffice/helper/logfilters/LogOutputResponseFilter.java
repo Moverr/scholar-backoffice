@@ -1,6 +1,6 @@
-package com.awamo.microservice.processengine.helper.logfilters;
+package com.codemovers.scholar.v1.backoffice.helper.logfilters;
 
-import com.awamo.microservice.processengine.helper.Utilities;
+import com.codemovers.scholar.v1.backoffice.helper.utilities;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Priority;
@@ -47,7 +47,7 @@ public class LogOutputResponseFilter implements ContainerResponseFilter {
             LOG.log(Level.INFO, logString);
             LOG.log(Level.INFO, "{0} ::\n------------------------------ session end -------------------------------------", new Object[] { logId });
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "unexpected exception\n{0}", new Object[] { Utilities.getStackTrace(e) });
+            LOG.log(Level.SEVERE, "unexpected exception\n{0}", new Object[]{utilities.getStackTrace(e)});
         }
         
     }
