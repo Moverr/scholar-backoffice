@@ -71,8 +71,7 @@ public class Application {
         context.setMaxFormContentSize(50000000);
 
         context.addServlet(
-                getServlet(com.codemovers.scholar.v1.backoffice.api.v1.account.AccountsEndpoint.class,
-                        Multipart.class
+                getServlet(com.codemovers.scholar.v1.backoffice.api.v1.account.AccountsEndpoint.class
                 ), "/account/v1/*");
 
         int port = 600;

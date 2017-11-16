@@ -5,9 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.abstracts;
 
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -23,32 +21,18 @@ public abstract class AbstractEndpoint<T> {
 
     public abstract T create(T entity);
 
-    public abstract T update(T entity);
-
-    public abstract T archive(@PathParam("id") Integer id);
-
-    public abstract void delete(@PathParam("id") Integer id);
-
-    /**
-     *
-     * @param start
-     * @param end
-     * @return
-     */
-    public abstract T[] list(
-            @DefaultValue("0") @PathParam("offset") Integer start,
-            @DefaultValue("50") @PathParam("limit") Integer end
-    );
-
     /**
      *
      * @param id
      * @return
      */
-    public abstract T getItem(
-            @PathParam("id") Integer id
-    );
+    public abstract T update(@PathParam("id") Integer id);
 
+    public abstract T archive(T entity);
+
+    public abstract void delete(T entity);
+
+    public abstract T list(int start, int end);
 
 
 
