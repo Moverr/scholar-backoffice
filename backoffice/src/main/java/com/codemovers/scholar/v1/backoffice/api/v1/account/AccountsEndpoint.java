@@ -40,7 +40,8 @@ public class AccountsEndpoint extends AbstractEndpoint<Account> {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Account update(Account entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entity;
+
     }
 
     @Override
@@ -49,15 +50,15 @@ public class AccountsEndpoint extends AbstractEndpoint<Account> {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("")
     public Account archive(Account entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entity;
     }
 
     @Override
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Account delete(Account entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Account entity) {
+
     }
 
 }

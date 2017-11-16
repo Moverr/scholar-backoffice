@@ -23,7 +23,7 @@ public abstract class AbstractEndpoint<T> {
 
     public abstract T archive(T entity);
 
-    public abstract T delete(T entity);
+    public abstract void delete(T entity);
 
 
 
