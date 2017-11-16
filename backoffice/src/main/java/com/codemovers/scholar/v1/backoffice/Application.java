@@ -9,6 +9,7 @@ import com.codemovers.scholar.v1.backoffice.helper.logfilters.LogInputRequestFil
 import com.codemovers.scholar.v1.backoffice.helper.logfilters.LogOutputResponseFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Multipart;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Server;
@@ -68,6 +69,11 @@ public class Application {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         context.setMaxFormContentSize(50000000);
+
+        context.addServlet(
+                getServlet(com.codemovers.scholar.v1.backoffice.api.v1.account.AccountsEndpoint.class,
+                        Multipart.class
+                ), "/account/v1/*");
 
         int port = 600;
         jettyServer = new Server(port);
