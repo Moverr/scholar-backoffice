@@ -7,7 +7,13 @@ package com.codemovers.scholar.v1.backoffice;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
+import org.quartz.Scheduler;
 
 /**
  *
@@ -17,6 +23,13 @@ public class Application {
 
     private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
+    private static int orderCounter = 0;
+    private static Server jettyServer;
+    private static Scheduler scheduler = null;
+    public static final int BUILD_NUMBER = 62;
+
+
+
     public static void main(String[] args) {
 
     }
@@ -25,7 +38,34 @@ public class Application {
         LOG.log(Level.INFO, "Starting Application ");
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
+        context.setMaxFormContentSize(50000000);
 
     }
+
+    private static ServletHolder getServlet(Class clazz, Class... features) {
+        ResourceConfig resourceConfig = new ResourceConfig(clazz);
+
+//        resourceConfig.property("jersey.config.server.tracing.type", "ALL");
+//        resourceConfig.property("jersey.config.server.tracing.threshold", "VERBOSE");
+        for (Class feature : features) {
+            resourceConfig.register(feature);
+        }
+
+        // default resources
+        resourceConfig.register(LogInputRequestFilter.class);
+        resourceConfig.register(JacksonFeature.class);
+
+//        if (!clazz.getPackage().getName().contains("v1b")) {
+//            resourceConfig.register(AuthorizationRequestFilter.class);
+//        }
+
+        resourceConfig.register(LogOutputResponseFilter.class);
+
+        ServletContainer servletContainer = new ServletContainer(resourceConfig);
+        ServletHolder sh = new ServletHolder(servletContainer);
+        sh.setInitOrder(orderCounter++);
+        return sh;
+    }
+
 
 }

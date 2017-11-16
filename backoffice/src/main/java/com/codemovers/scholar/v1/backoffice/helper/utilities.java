@@ -362,4 +362,5 @@ Using SHA-256 :
         return validator.validate(EmailAddress);
     }
 
+
 }

@@ -1,4 +1,4 @@
-package com.codemovers.scholar.v1.backoffice.helper.exception;
+package com.codemovers.scholar.v1.backoffice.helper.exceptions;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
