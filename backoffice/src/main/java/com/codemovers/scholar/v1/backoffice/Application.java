@@ -9,6 +9,8 @@ import com.codemovers.scholar.v1.backoffice.helper.logfilters.LogInputRequestFil
 import com.codemovers.scholar.v1.backoffice.helper.logfilters.LogOutputResponseFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -34,13 +36,48 @@ public class Application {
 
     public static void main(String[] args) {
 
+        init();
+        startServer(true);
+
     }
 
-    public void init() {
+    private static void startServer(boolean persistent) {
+        try {
+
+            jettyServer.start();
+            if (persistent) {
+                jettyServer.join();
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (persistent) {
+                // stopLogFilesScheduler();
+                jettyServer.destroy();
+
+            }
+        }
+
+        LOG.log(Level.INFO, " Starting Server  ");
+    }
+
+
+    public static void init() {
         LOG.log(Level.INFO, "Starting Application ");
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         context.setMaxFormContentSize(50000000);
+
+        int port = 600;
+        jettyServer = new Server(port);
+
+        for (Connector connector : jettyServer.getConnectors()) {
+            LOG.log(Level.INFO, "Port: {0}", Integer.toString(((NetworkConnector) connector).getPort()));
+        }
+        jettyServer.setHandler(context);
+
+
 
     }
 
