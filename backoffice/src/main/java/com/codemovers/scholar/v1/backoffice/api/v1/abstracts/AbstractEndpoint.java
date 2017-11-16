@@ -17,13 +17,13 @@ public abstract class AbstractEndpoint<T> {
         this.AbstractEndpoint = AbstractEndpoint;
     }
 
-    public abstract Class<T> create(T entity);
+    public abstract T create(T entity);
 
-    public abstract Class<T> update(T entity);
+    public abstract T update(T entity);
 
-    public abstract Class<T> archive(T entity);
+    public abstract T archive(T entity);
 
-    public abstract Class<T> delete(T entity);
+    public abstract T delete(T entity);
 
 
 
