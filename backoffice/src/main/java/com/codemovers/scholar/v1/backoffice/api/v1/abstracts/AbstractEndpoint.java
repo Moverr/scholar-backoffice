@@ -6,18 +6,14 @@
 package com.codemovers.scholar.v1.backoffice.api.v1.abstracts;
 
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author mover 11/15/2017
  */
 public abstract class AbstractEndpoint<T> {
-
-    private final Class<T> AbstractEndpoint;
-
-    public AbstractEndpoint(Class<T> AbstractEndpoint) {
-        this.AbstractEndpoint = AbstractEndpoint;
-    }
 
     public abstract T create(T entity);
 
@@ -26,13 +22,13 @@ public abstract class AbstractEndpoint<T> {
      * @param id
      * @return
      */
-    public abstract T update(@PathParam("id") Integer id);
+    public abstract T update(@PathParam("id") Integer id, T entity);
 
-    public abstract T archive(T entity);
+    public abstract Response archive(@PathParam("id") Integer id);
 
-    public abstract void delete(T entity);
+    public abstract Response delete(@PathParam("id") Integer id);
 
-    public abstract T list(int start, int end);
+    public abstract T list(@QueryParam("start") int start, @QueryParam("end") int end);
 
 
 

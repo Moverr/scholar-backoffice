@@ -5,6 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.account.entities;
 
+import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
@@ -15,67 +16,64 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
 
-    private String ACCOUNTTYPE;
+    private AccountType accounttype;
     //THIS CAN BE AN EMAIL
-    private String USERNAME;
-    private String PASSWORD;
-    private String EMAILADDRESS;
-
-    //
-    private String ACCOUNTID;
+    private String username;
+    private String password;
+    private String emailaddress;
+    private String accountid;
 
     public Account() {
     }
 
-    public String getACCOUNTTYPE() {
-        return ACCOUNTTYPE;
+    public AccountType getAccounttype() {
+        return accounttype;
     }
 
-    public void setACCOUNTTYPE(String ACCOUNTTYPE) {
-        this.ACCOUNTTYPE = ACCOUNTTYPE;
+    public void setAccounttype(AccountType accounttype) {
+        this.accounttype = accounttype;
     }
 
-    public String getUSERNAME() {
-        return USERNAME;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUSERNAME(String USERNAME) {
-        this.USERNAME = USERNAME;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPASSWORD() {
-        return PASSWORD;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPASSWORD(String PASSWORD) {
-        this.PASSWORD = PASSWORD;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-
-    public String getEMAILADDRESS() {
-        return EMAILADDRESS;
+    public String getEmailaddress() {
+        return emailaddress;
     }
 
-    public void setEMAILADDRESS(String EMAILADDRESS) {
-        this.EMAILADDRESS = EMAILADDRESS;
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
     }
 
-    public String getACCOUNTID() {
-        return ACCOUNTID;
+    public String getAccountid() {
+        return accountid;
     }
 
-    public void setACCOUNTID(String ACCOUNTID) {
-        this.ACCOUNTID = ACCOUNTID;
+    public void setAccountid(String accountid) {
+        this.accountid = accountid;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.ACCOUNTTYPE);
-        hash = 79 * hash + Objects.hashCode(this.USERNAME);
-        hash = 79 * hash + Objects.hashCode(this.PASSWORD);
-        hash = 79 * hash + Objects.hashCode(this.EMAILADDRESS);
-        hash = 79 * hash + Objects.hashCode(this.ACCOUNTID);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.accounttype);
+        hash = 53 * hash + Objects.hashCode(this.username);
+        hash = 53 * hash + Objects.hashCode(this.password);
+        hash = 53 * hash + Objects.hashCode(this.emailaddress);
+        hash = 53 * hash + Objects.hashCode(this.accountid);
         return hash;
     }
 
@@ -91,30 +89,30 @@ public class Account {
             return false;
         }
         final Account other = (Account) obj;
-        if (!Objects.equals(this.ACCOUNTTYPE, other.ACCOUNTTYPE)) {
+        if (!Objects.equals(this.username, other.username)) {
             return false;
         }
-        if (!Objects.equals(this.USERNAME, other.USERNAME)) {
+        if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (!Objects.equals(this.EMAILADDRESS, other.EMAILADDRESS)) {
+        if (!Objects.equals(this.emailaddress, other.emailaddress)) {
             return false;
         }
-        if (!Objects.equals(this.ACCOUNTID, other.ACCOUNTID)) {
+        if (!Objects.equals(this.accountid, other.accountid)) {
             return false;
         }
-        return Objects.equals(this.PASSWORD, other.PASSWORD);
+        return this.accounttype == other.accounttype;
     }
 
     @Override
     public String toString() {
         return this.getClass().getCanonicalName()
                 + "{"
-                + "ACCOUNTTYPE=" + ACCOUNTTYPE
-                + ", USERNAME=" + USERNAME
-                + ", PASSWORD=" + PASSWORD
-                + ", EMAILADDRESS=" + EMAILADDRESS
-                + ", ACCOUNTID=" + ACCOUNTID
+                + "accounttype=" + accounttype
+                + ", username=" + username
+                + ", password=" + password
+                + ", emailaddress=" + emailaddress
+                + ", accountid=" + accountid
                 + "}";
     }
 

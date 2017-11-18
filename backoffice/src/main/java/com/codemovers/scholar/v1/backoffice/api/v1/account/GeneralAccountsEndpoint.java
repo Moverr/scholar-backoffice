@@ -11,26 +11,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author mover 11/15/2017
  */
 @Path("/")
-public class AccountsEndpoint extends AbstractEndpoint<Account> {
+public class GeneralAccountsEndpoint extends AbstractEndpoint<Account> {
     private static final Logger LOG = Logger.getLogger(AbstractEndpoint.class.getName());
 
-    public AccountsEndpoint(Class<Account> AbstractEndpoint) {
-
-        super(AbstractEndpoint);
-        LOG.log(Level.INFO, "  Inside Account Endpoint   ");
-
+    public GeneralAccountsEndpoint() {
     }
 
     @POST
@@ -39,15 +39,19 @@ public class AccountsEndpoint extends AbstractEndpoint<Account> {
     @Override
     public Account create(Account entity) {
 
+        LOG.log(Level.INFO, "Create General Account Endpoint ");
+
+        //todo: assign role to connector ::
         return entity;
     }
+
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("update/")
+    @Path("update/{id}")
     @Override
-    public Account update(@PathParam("id") Integer id) {
+    public Account update(@PathParam("id") Integer id, Account entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -57,8 +61,8 @@ public class AccountsEndpoint extends AbstractEndpoint<Account> {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("archive/{id}")
-    public Account archive(Account entity) {
-        return entity;
+    public Response archive(@PathParam("id") Integer id) {
+        return null;
     }
 
     @Override
@@ -66,13 +70,20 @@ public class AccountsEndpoint extends AbstractEndpoint<Account> {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void delete(Account entity) {
-
+    public Response delete(@PathParam("id") Integer id) {
+        return null;
     }
 
     @Override
-    public Account list(int start, int end) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Path("list/")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Account list(@QueryParam("start") @DefaultValue("0") int start, @QueryParam("end") @DefaultValue("50") int end) {
+
+        LOG.log(Level.INFO, "INSIDE THE DAMN ");
+        return null;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
