@@ -59,7 +59,7 @@ public class GeneralAccounts implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @OneToMany(mappedBy = "accountId")
+    @OneToMany(mappedBy = "account")
     private Collection<Users> usersCollection;
 
     public GeneralAccounts() {

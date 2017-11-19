@@ -64,7 +64,7 @@ public class Users implements Serializable {
     private Collection<UserRole> userRoleCollection;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @ManyToOne
-    private GeneralAccounts accountId;
+    private GeneralAccounts account;
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     @ManyToOne
     private Person personId;
@@ -125,12 +125,12 @@ public class Users implements Serializable {
         this.userRoleCollection = userRoleCollection;
     }
 
-    public GeneralAccounts getAccountId() {
-        return accountId;
+    public GeneralAccounts getAccount() {
+        return account;
     }
 
-    public void setAccountId(GeneralAccounts accountId) {
-        this.accountId = accountId;
+    public void setAccount(GeneralAccounts account) {
+        this.account = account;
     }
 
     public Person getPersonId() {
@@ -171,7 +171,7 @@ public class Users implements Serializable {
                 + ", dateCreated=" + dateCreated
                 + ", status=" + status
                 + ", userRoleCollection=" + userRoleCollection
-                + ", accountId=" + accountId
+                + ", accountId=" + account
                 + ", personId=" + personId
                 + "}";
     }

@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Manny
+ * @author Mover 11/19/2017
  */
 public class UserJpaController extends JpaController {
 

@@ -5,6 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.users.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,9 +13,11 @@ import java.util.Objects;
  *
  * @author MOver 11/19/2017
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class _User {
 
     private Integer id;
+
     private Integer account_id;
     private Integer person_id;
     private String username;
