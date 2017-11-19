@@ -1,11 +1,11 @@
 package com.codemovers.scholar.v1.backoffice.helper;
 
+import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getStackTrace;
 import com.codemovers.scholar.v1.backoffice.helper.exceptions.UnauthorizedException;
 import java.lang.annotation.Annotation;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Priority;
-import javax.swing.text.Utilities;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -140,7 +140,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
             }
         } catch (Exception e) {
             LOG.log(Level.SEVERE, "unexpected exception\n{0}", new Object[]{
-                Utilities.getStackTrace(e)
+                getStackTrace(e)
         });
         }
 
