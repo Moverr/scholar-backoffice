@@ -9,17 +9,16 @@ package com.codemovers.scholar.v1.backoffice.api.v1.persons.enums;
  *
  * @author MOVER 11/5/2017
  */
-public enum Gender {
+public enum MaritalStatus {
     INVALID(0, "INVALID", "invalid"),
-    MALE(1, "MALE", "male"),
-    FEMALE(2, "FEMALE", "female");
-
+    SINGLE(1, "SINGLE", "single"),
+    MARRIED(2, "MARRIED", "married");
 
     private final Integer id;
     private final String code;
     private final String value;
 
-    private Gender(Integer id, String code, String value) {
+    private MaritalStatus(Integer id, String code, String value) {
         this.id = id;
         this.code = code;
         this.value = value;
@@ -37,25 +36,25 @@ public enum Gender {
         return value;
     }
 
-    public static Gender fromInt(final Integer accountType) {
-        Gender _gender = Gender.INVALID;
+    public static MaritalStatus fromInt(final Integer accountType) {
+        MaritalStatus _marital_status = MaritalStatus.INVALID;
 
         if (accountType != null) {
             switch (accountType) {
                 case 1:
-                    _gender = Gender.MALE;
+                    _marital_status = MaritalStatus.SINGLE;
                     break;
                 case 2:
-                    _gender = Gender.FEMALE;
+                    _marital_status = MaritalStatus.MARRIED;
                     break;
 
                 default:
-                    _gender = INVALID;
+                    _marital_status = INVALID;
                     break;
             }
         }
 
-        return _gender;
+        return _marital_status;
     }
 
 
