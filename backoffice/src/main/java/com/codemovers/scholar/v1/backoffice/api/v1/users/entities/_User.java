@@ -5,6 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.users.entities;
 
+import com.codemovers.scholar.v1.backoffice.api.annotation.Mandatory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.Objects;
@@ -18,10 +19,13 @@ public class _User {
 
     private Integer id;
 
-    private Integer account_id;
+    private @Mandatory
+    Integer account_id;
     private Integer person_id;
-    private String username;
-    private String password;
+    private @Mandatory
+    String username;
+    private @Mandatory
+    String password;
     private Date datecreated;
     private String status;
 
