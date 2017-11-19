@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codemovers.scholar.v1.backoffice.api.v1.account.entities.enums;
+package com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.enums;
 
 /**
  *

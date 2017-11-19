@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codemovers.scholar.v1.backoffice.api.v1.account.entities;
+package com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities;
 
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -14,7 +14,7 @@ import java.util.Objects;
  * @author MOVER 11/15/2017
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Account {
+public class _Account {
 
     private AccountType accounttype;
     //THIS CAN BE AN EMAIL
@@ -23,7 +23,7 @@ public class Account {
     private String emailaddress;
     private String accountid;
 
-    public Account() {
+    public _Account() {
     }
 
     public AccountType getAccounttype() {
@@ -88,7 +88,7 @@ public class Account {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Account other = (Account) obj;
+        final _Account other = (_Account) obj;
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
