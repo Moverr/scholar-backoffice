@@ -4,7 +4,7 @@ import com.codemovers.scholar.v1.backoffice.helper.exceptions.UnauthorizedExcept
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Priority;
-import com.codemovers.scholar.v1.backoffice.helper.utilities;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -22,7 +22,7 @@ public class LogInputRequestFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) {
         LOG.log(Level.INFO, "------------------------------ session start -----------------------------------");
-        String logId = utilities.getLogId();
+        String logId = Utilities.getLogId();
 
         try {
             String userAgent = requestContext.getHeaderString("User-Agent");
@@ -59,13 +59,13 @@ public class LogInputRequestFilter implements ContainerRequestFilter {
 
             if (requestContext.hasEntity() && request.getLength() > 2) {
                 request.bufferEntity();
-                logString += "\n\tbody=" + utilities.readAsString(request.getEntityStream());
+                logString += "\n\tbody=" + Utilities.readAsString(request.getEntityStream());
             } else {
                 logString += "\n\tBody=<none>";
             }
             LOG.log(Level.INFO, logString);
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "unexpected exception\n{0}", new Object[]{utilities.getStackTrace(e)});
+            LOG.log(Level.SEVERE, "unexpected exception\n{0}", new Object[]{Utilities.getStackTrace(e)});
         }
         
     }

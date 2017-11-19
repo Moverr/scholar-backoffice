@@ -1,7 +1,7 @@
 package com.codemovers.scholar.v1.backoffice.db;
 
 import com.codemovers.scholar.v1.backoffice.helper.annotation.MainId;
-import com.codemovers.scholar.v1.backoffice.helper.utilities;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
@@ -184,12 +184,12 @@ public abstract class JpaController<T extends Entity> implements Serializable {
             return null;
         } catch (PersistenceException ex) {
             LOG.log(Level.SEVERE, "unexpected persistence exception {0}\n{1}", new Object[]{ex.getMessage(),
-                utilities.getStackTrace(ex)
+                Utilities.getStackTrace(ex)
 
             });
             // don't throw WebApplicationException, force caller to handle this
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), utilities.getStackTrace(ex)});
+            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
             return null;
         } finally {
             LOG.log(Level.FINER, "closing entity manager {0}", entityManager);

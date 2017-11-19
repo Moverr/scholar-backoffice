@@ -140,7 +140,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
             }
         } catch (Exception e) {
             LOG.log(Level.SEVERE, "unexpected exception\n{0}", new Object[]{
-                utilities.getStackTrace(e)
+                Utilities.getStackTrace(e)
         });
         }
 

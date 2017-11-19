@@ -1,4 +1,4 @@
-package com.awamo.microservice.processengine.annotation;
+package com.codemovers.scholar.v1.backoffice.api.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

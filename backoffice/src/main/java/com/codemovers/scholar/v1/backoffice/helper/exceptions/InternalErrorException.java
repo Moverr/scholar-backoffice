@@ -1,6 +1,6 @@
 package com.codemovers.scholar.v1.backoffice.helper.exceptions;
 
-import com.codemovers.scholar.v1.backoffice.helper.utilities;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +27,7 @@ public class InternalErrorException extends RuntimeException {
         LOG.log(Level.SEVERE, message, "INTERNAL SERVER ERROR ");
 
         if (ex != null) {
-            LOG.log(Level.SEVERE, utilities.getStackTrace(ex));
+            LOG.log(Level.SEVERE, Utilities.getStackTrace(ex));
         }
     }
 

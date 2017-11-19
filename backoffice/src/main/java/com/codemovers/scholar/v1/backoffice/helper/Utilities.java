@@ -1,5 +1,9 @@
 package com.codemovers.scholar.v1.backoffice.helper;
 
+import com.codemovers.scholar.v1.backoffice.api.annotation.ConditionallyMandatory;
+import com.codemovers.scholar.v1.backoffice.api.annotation.Mandatory;
+import com.codemovers.scholar.v1.backoffice.helper.exceptions.BadRequestException;
+import com.codemovers.scholar.v1.backoffice.helper.exceptions.InternalErrorException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -7,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,12 +24,12 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by mover on 5/1/2017.
  */
-public class utilities {
+public class Utilities {
 
     public static final String DATE_FORMAT = "dd/MMM/yyyy";
     public static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
 
-    private static final Logger LOG = Logger.getLogger(utilities.class.getName());
+    private static final Logger LOG = Logger.getLogger(Utilities.class.getName());
     private static final Calendar CALENDAR = Calendar.getInstance(DEFAULT_LOCALE);
     public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final Random RANDOM = new Random();
@@ -98,7 +103,7 @@ public class utilities {
             try {
                 is.read(bytes);
             } catch (IOException ex) {
-                LOG.log(Level.SEVERE, utilities.getStackTrace(ex));
+                LOG.log(Level.SEVERE, Utilities.getStackTrace(ex));
             }
         } else {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -113,7 +118,7 @@ public class utilities {
 
                 buffer.flush();
             } catch (IOException ex) {
-                LOG.log(Level.SEVERE, utilities.getStackTrace(ex));
+                LOG.log(Level.SEVERE, Utilities.getStackTrace(ex));
             }
 
             bytes = buffer.toByteArray();
@@ -241,7 +246,7 @@ public class utilities {
     }
 
     public static String getFormattedDate(Date date) {
-        return new SimpleDateFormat(DATE_FORMAT, utilities.DEFAULT_LOCALE).format(date);
+        return new SimpleDateFormat(DATE_FORMAT, Utilities.DEFAULT_LOCALE).format(date);
     }
 
     public static void logHttpServletRequest(HttpServletRequest httpServletRequest, String logId) {
@@ -361,6 +366,56 @@ Using SHA-256 :
         EmailValidator validator = new EmailValidator();
         return validator.validate(EmailAddress);
     }
+
+    public static void validateFields(Class clazz, Object obj) {
+        validateMandatoryFields(clazz, obj);
+
+    }
+
+    public static void validateMandatoryFields(Class clazz, Object obj) {
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.getDeclaredAnnotation(Mandatory.class) != null) {
+                try {
+                    field.setAccessible(true);
+                    if (field.get(obj) == null) {
+                        throw new BadRequestException("missing mandatory field: " + field.getName());
+                    }
+                } catch (IllegalArgumentException | IllegalAccessException ex) {
+                    throw new InternalErrorException("unexpected error on field validation, Exception message: " + ex.getMessage(), ex);
+                }
+            } else if (field.getDeclaredAnnotation(ConditionallyMandatory.class) != null) {
+                try {
+                    Field parentField = clazz.getDeclaredField(field.getDeclaredAnnotation(ConditionallyMandatory.class).parent());
+                    parentField.setAccessible(true);
+                    String parentObject = parentField.get(obj).toString();
+                    if (parentObject != null) {
+                        // field is mandatory if parent value equals the annotated value
+                        Object expectedParentValue = field.getDeclaredAnnotation(ConditionallyMandatory.class).mandatoryOnValue();
+                        if (parentObject.equals(expectedParentValue)) {
+                            field.setAccessible(true);
+                            if (field.get(obj) == null) {
+                                throw new BadRequestException("missing mandatory field: " + field.getName());
+                            }
+                        }
+
+                        // field is mandatory if parent value does not equal the annotated value
+                        expectedParentValue = field.getDeclaredAnnotation(ConditionallyMandatory.class).notMandatoryOnValue();
+                        if (!parentObject.equals(expectedParentValue)) {
+                            field.setAccessible(true);
+                            if (field.get(obj) == null) {
+                                throw new BadRequestException("missing mandatory field: " + field.getName());
+                            }
+                        }
+                    }
+                } catch (IllegalArgumentException | IllegalAccessException ex) {
+                    throw new InternalErrorException("unexpected error on field validation, message: " + ex.getMessage(), ex);
+                } catch (NoSuchFieldException | SecurityException ex) {
+                    Logger.getLogger(Utilities.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
 
 
 }
