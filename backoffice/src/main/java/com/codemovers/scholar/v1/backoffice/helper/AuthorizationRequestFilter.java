@@ -20,7 +20,7 @@ import javax.ws.rs.core.MultivaluedMap;
  * This must be evaluated BEFORE the cache kicks in!
  * => @Priority(200), cache uses priority 300
  *
- * @author podolak
+ * @author Mover
  */
 @Priority(200)
 public class AuthorizationRequestFilter implements ContainerRequestFilter {

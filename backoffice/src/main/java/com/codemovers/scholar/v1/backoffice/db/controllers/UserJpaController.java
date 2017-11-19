@@ -19,6 +19,15 @@ public class UserJpaController extends JpaController {
 
     protected static final Logger LOG = Logger.getLogger(UserJpaController.class.getName());
 
+    private static UserJpaController controller = null;
+
+    public static UserJpaController getInstance() {
+        if (controller == null) {
+            controller = new UserJpaController();
+        }
+        return controller;
+    }
+
     public UserJpaController() {
         super(Users.class);
     }

@@ -7,6 +7,7 @@ package com.codemovers.scholar.v1.backoffice.api.v1.users;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
+import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 
@@ -15,6 +16,21 @@ import com.codemovers.scholar.v1.backoffice.db.entities.Users;
  * @author MOver 11/19/2017
  */
 public class UserService extends AbstractService<_User> {
+
+    private final UserJpaController controller;
+
+    private static UserService service = null;
+
+    public UserService() {
+        controller = UserJpaController.getInstance();
+    }
+
+    public static UserService getInstance() {
+        if (service == null) {
+            service = new UserService();
+        }
+        return service;
+    }
 
     @Override
     public _User create(_User entity) {
