@@ -23,6 +23,10 @@ public class _Account {
     private String emailaddress;
     private String accountid;
 
+    private String status;
+    private String externalid;
+    private String date_created;
+
     public _Account() {
     }
 
@@ -66,14 +70,41 @@ public class _Account {
         this.accountid = accountid;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getExternalid() {
+        return externalid;
+    }
+
+    public void setExternalid(String externalid) {
+        this.externalid = externalid;
+    }
+
+    public String getDate_created() {
+        return date_created;
+    }
+
+    public void setDate_created(String date_created) {
+        this.date_created = date_created;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.accounttype);
-        hash = 53 * hash + Objects.hashCode(this.username);
-        hash = 53 * hash + Objects.hashCode(this.password);
-        hash = 53 * hash + Objects.hashCode(this.emailaddress);
-        hash = 53 * hash + Objects.hashCode(this.accountid);
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.accounttype);
+        hash = 59 * hash + Objects.hashCode(this.username);
+        hash = 59 * hash + Objects.hashCode(this.password);
+        hash = 59 * hash + Objects.hashCode(this.emailaddress);
+        hash = 59 * hash + Objects.hashCode(this.accountid);
+        hash = 59 * hash + Objects.hashCode(this.status);
+        hash = 59 * hash + Objects.hashCode(this.externalid);
+        hash = 59 * hash + Objects.hashCode(this.date_created);
         return hash;
     }
 
@@ -101,6 +132,15 @@ public class _Account {
         if (!Objects.equals(this.accountid, other.accountid)) {
             return false;
         }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        if (!Objects.equals(this.externalid, other.externalid)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_created, other.date_created)) {
+            return false;
+        }
         return this.accounttype == other.accounttype;
     }
 
@@ -113,8 +153,12 @@ public class _Account {
                 + ", password=" + password
                 + ", emailaddress=" + emailaddress
                 + ", accountid=" + accountid
+                + ", status=" + status
+                + ", externalid=" + externalid
+                + ", date_created=" + date_created
                 + "}";
     }
+
 
 
 }

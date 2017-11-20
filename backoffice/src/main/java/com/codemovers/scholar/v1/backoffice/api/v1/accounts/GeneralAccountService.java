@@ -7,9 +7,7 @@ package com.codemovers.scholar.v1.backoffice.api.v1.accounts;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
-import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
-import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
 
@@ -42,6 +40,8 @@ public class GeneralAccountService extends AbstractService<_Account> {
         Person person = null;
 
         //todo : create a general account
+        accounts = new GeneralAccounts();
+
         //todo: create a user
         //todo:: assign user role
         return entity;
