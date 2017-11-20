@@ -116,12 +116,12 @@ public class GeneralAccountJpaController extends JpaController {
     }
 
     public List<GeneralAccounts> findByName(String name) {
-        List<GeneralAccounts> mOfficeList = new ArrayList<>();
+        List<GeneralAccounts> generalAccountList = new ArrayList<>();
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("MOffice.findByName");
         query.setParameter("name", name);
         try {
-            mOfficeList = query.getResultList();
+            generalAccountList = query.getResultList();
             LOG.log(Level.FINE, "offices found for username {0}", new Object[]{name});
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
@@ -131,16 +131,16 @@ public class GeneralAccountJpaController extends JpaController {
             LOG.log(Level.FINER, "closing entity manager {0}", em);
             em.close();
         }
-        return mOfficeList;
+        return generalAccountList;
     }
 
     public GeneralAccounts findByExternalId(String externalId) {
-        GeneralAccounts mOffice = new GeneralAccounts();
+        GeneralAccounts generalAccount = new GeneralAccounts();
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("MOffice.findByExternalId");
         query.setParameter("external_id", externalId);
         try {
-            mOffice = (GeneralAccounts) query.getSingleResult();
+            generalAccount = (GeneralAccounts) query.getSingleResult();
             LOG.log(Level.FINE, "offices found for externalId {0}", new Object[]{externalId});
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
@@ -150,16 +150,16 @@ public class GeneralAccountJpaController extends JpaController {
             LOG.log(Level.FINER, "closing entity manager {0}", em);
             em.close();
         }
-        return mOffice;
+        return generalAccount;
     }
 
     public List<GeneralAccounts> findByHeirarchy(String heirarchy) {
-        List<GeneralAccounts> mOfficeList = new ArrayList<>();
+        List<GeneralAccounts> generalAccountList = new ArrayList<>();
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("MOffice.findByHierarchy");
         query.setParameter("hierarchy", heirarchy);
         try {
-            mOfficeList = query.getResultList();
+            generalAccountList = query.getResultList();
             LOG.log(Level.FINE, "offices found for heirarchy {0}", new Object[]{heirarchy});
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
@@ -169,16 +169,16 @@ public class GeneralAccountJpaController extends JpaController {
             LOG.log(Level.FINER, "closing entity manager {0}", em);
             em.close();
         }
-        return mOfficeList;
+        return generalAccountList;
     }
 
     public List<GeneralAccounts> findByParentId(String parentId) {
-        List<GeneralAccounts> mOfficeList = new ArrayList<>();
+        List<GeneralAccounts> generalAccountList = new ArrayList<>();
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("MOffice.findByParentId");
         query.setParameter("parent_id", parentId);
         try {
-            mOfficeList = query.getResultList();
+            generalAccountList = query.getResultList();
             LOG.log(Level.FINE, "offices found for parentId {0}", new Object[]{parentId});
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
@@ -188,7 +188,7 @@ public class GeneralAccountJpaController extends JpaController {
             LOG.log(Level.FINER, "closing entity manager {0}", em);
             em.close();
         }
-        return mOfficeList;
+        return generalAccountList;
     }
 
     public int getCount() {
