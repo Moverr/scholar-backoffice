@@ -10,6 +10,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
+import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 
 /**
  *
@@ -34,14 +35,31 @@ public class UserService extends AbstractService<_User> {
 
     @Override
     public _User create(_User entity) {
+        // Validate Mandatories 
+        entity.validateMandatory();
 
         Users user = new Users();
         GeneralAccounts account = new GeneralAccounts(entity.getAccount_id().longValue());
         user.setAccount(account);
         user.setPassword(entity.getPassword());
+        user.setUsername(entity.getUsername());
+        StatusEnum statusEnum = StatusEnum.fromString(entity.getStatus());
 
-        return entity;
+        // todo :  crerate new user and return user ::
+        Users users = controller.create(user);
+        return populateResponse(users);
 
+    }
+
+    private _User populateResponse(Users users) {
+
+        _User user = new _User();
+        user.setId(users.getId().intValue());
+        user.setAccount_id(users.getAccount().getId().intValue());
+        user.setUsername(users.getUsername());
+        user.setStatus(users.getStatus());
+
+        return user;
     }
 
 }
