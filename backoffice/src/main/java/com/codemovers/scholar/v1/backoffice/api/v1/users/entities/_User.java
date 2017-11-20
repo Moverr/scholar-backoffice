@@ -5,7 +5,9 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.users.entities;
 
+import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEntity;
 import com.codemovers.scholar.v1.backoffice.api.annotation.Mandatory;
+import static com.codemovers.scholar.v1.backoffice.helper.Utilities.validateMandatoryFields;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.Objects;
@@ -15,7 +17,7 @@ import java.util.Objects;
  * @author MOver 11/19/2017
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class _User {
+public class _User extends AbstractEntity {
 
     private Integer id;
 
@@ -136,6 +138,12 @@ public class _User {
             return false;
         }
         return Objects.equals(this.datecreated, other.datecreated);
+    }
+
+    @Override
+    public void validateMandatory() {
+        validateMandatoryFields(this.getClass(), this);
+
     }
 
     @Override

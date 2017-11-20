@@ -5,12 +5,15 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.persons.entities;
 
+import com.codemovers.scholar.v1.backoffice.api.annotation.Mandatory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
 /**
  *
  * @author Mover 11/19/2017
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class _person {
 
     private Integer id;
