@@ -10,6 +10,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.roles.entities._Role;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
 import com.codemovers.scholar.v1.backoffice.db.controllers.RoleJpaController;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
+import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
 
 /**
  *
@@ -40,6 +41,14 @@ public class RolesService extends AbstractService<_Role> {
 
     @Override
     public _Role getById(Integer Id) throws Exception {
+        controller.find(Id);
+
+        return null;
+    }
+
+    public List<Roles> getRoleByName(String name) throws Exception {
+
+        return controller.findByName(name);
 
     }
 
