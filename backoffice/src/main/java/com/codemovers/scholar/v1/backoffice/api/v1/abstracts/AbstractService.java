@@ -12,4 +12,6 @@ package com.codemovers.scholar.v1.backoffice.api.v1.abstracts;
 public abstract class AbstractService<T> {
 
     public abstract T create(T entity);
+    public abstract T getById(Integer Id);
+
 }

@@ -39,6 +39,8 @@ public class UserService extends AbstractService<_User> {
         entity.validateMandatory();
 
         Users user = new Users();
+
+        // get General Account by Id 
         GeneralAccounts account = new GeneralAccounts(entity.getAccount_id().longValue());
         user.setAccount(account);
         user.setPassword(entity.getPassword());
@@ -60,6 +62,11 @@ public class UserService extends AbstractService<_User> {
         user.setStatus(users.getStatus());
         user.setDatecreated(users.getDateCreated());
         return user;
+    }
+
+    @Override
+    public _User getById(Integer Id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
