@@ -8,6 +8,7 @@ package com.codemovers.scholar.v1.backoffice.db.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -60,14 +63,25 @@ public class Users implements Serializable {
     @Size(max = 8)
     @Column(name = "status")
     private String status;
-    @OneToMany(mappedBy = "userId")
-    private Collection<UserRole> userRoleCollection;
+//    @OneToMany(mappedBy = "userId")
+//    private Collection<UserRole> userRoleCollection;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @ManyToOne
     private GeneralAccounts account;
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     @ManyToOne
     private Person personId;
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = {
+                @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "role_id")
+            }
+    )
+    private Set<Roles> roles;
 
     public Users() {
     }
@@ -116,14 +130,14 @@ public class Users implements Serializable {
         this.status = status;
     }
 
-    @XmlTransient
-    public Collection<UserRole> getUserRoleCollection() {
-        return userRoleCollection;
-    }
-
-    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
-        this.userRoleCollection = userRoleCollection;
-    }
+//    @XmlTransient
+//    public Collection<UserRole> getUserRoleCollection() {
+//        return userRoleCollection;
+//    }
+//
+//    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
+//        this.userRoleCollection = userRoleCollection;
+//    }
 
     public GeneralAccounts getAccount() {
         return account;
@@ -140,6 +154,19 @@ public class Users implements Serializable {
     public void setPersonId(Person personId) {
         this.personId = personId;
     }
+
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Roles role) {
+        this.roles.add(role);
+    }
+
 
     @Override
     public int hashCode() {
@@ -170,7 +197,7 @@ public class Users implements Serializable {
                 + ", password=" + password
                 + ", dateCreated=" + dateCreated
                 + ", status=" + status
-                + ", userRoleCollection=" + userRoleCollection
+                + ", roles=" + roles
                 + ", accountId=" + account
                 + ", personId=" + personId
                 + "}";

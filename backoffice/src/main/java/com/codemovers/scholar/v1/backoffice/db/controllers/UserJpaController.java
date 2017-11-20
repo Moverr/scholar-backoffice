@@ -71,7 +71,7 @@ public class UserJpaController extends JpaController {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = user.getId().intValue();
-                if (findAccount(id) == null) {
+                if (findUser(id) == null) {
                     throw new BadRequestException("The mOffice with id " + id + " no longer exists.");
                 }
             }
@@ -83,7 +83,7 @@ public class UserJpaController extends JpaController {
         }
     }
 
-    public Users findAccount(Integer id) {
+    public Users findUser(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Users.class, id);
@@ -116,14 +116,14 @@ public class UserJpaController extends JpaController {
         return UserJpaController.this.findUserEntities(false, maxResults, firstResult);
     }
 
-    public List<Users> findByName(String name) {
+    public List<Users> findByUserName(String username) {
         List<Users> userList = new ArrayList<>();
         EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByName");
-        query.setParameter("name", name);
+        Query query = em.createNamedQuery("Users.findByUsername");
+        query.setParameter("username", username);
         try {
             userList = query.getResultList();
-            LOG.log(Level.FINE, "offices found for username {0}", new Object[]{name});
+            LOG.log(Level.FINE, "offices found for username {0}", new Object[]{username});
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
             return null;
@@ -154,43 +154,43 @@ public class UserJpaController extends JpaController {
         return userList;
     }
 
-    public List<Users> findByHeirarchy(String heirarchy) {
-        List<Users> userList = new ArrayList<>();
-        EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByHierarchy");
-        query.setParameter("hierarchy", heirarchy);
-        try {
-            userList = query.getResultList();
-            LOG.log(Level.FINE, "offices found for heirarchy {0}", new Object[]{heirarchy});
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
-            return null;
-            // don't throw WebApplicationException, force caller to handle this
-        } finally {
-            LOG.log(Level.FINER, "closing entity manager {0}", em);
-            em.close();
-        }
-        return userList;
-    }
-
-    public List<Users> findByParentId(String parentId) {
-        List<Users> userList = new ArrayList<>();
-        EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByParentId");
-        query.setParameter("parent_id", parentId);
-        try {
-            userList = query.getResultList();
-            LOG.log(Level.FINE, "offices found for parentId {0}", new Object[]{parentId});
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
-            return null;
-            // don't throw WebApplicationException, force caller to handle this
-        } finally {
-            LOG.log(Level.FINER, "closing entity manager {0}", em);
-            em.close();
-        }
-        return userList;
-    }
+//    public List<Users> findByHeirarchy(String heirarchy) {
+//        List<Users> userList = new ArrayList<>();
+//        EntityManager em = getEntityManager();
+//        Query query = em.createNamedQuery("MOffice.findByHierarchy");
+//        query.setParameter("hierarchy", heirarchy);
+//        try {
+//            userList = query.getResultList();
+//            LOG.log(Level.FINE, "offices found for heirarchy {0}", new Object[]{heirarchy});
+//        } catch (Exception ex) {
+//            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
+//            return null;
+//            // don't throw WebApplicationException, force caller to handle this
+//        } finally {
+//            LOG.log(Level.FINER, "closing entity manager {0}", em);
+//            em.close();
+//        }
+//        return userList;
+//    }
+//
+//    public List<Users> findByParentId(String parentId) {
+//        List<Users> userList = new ArrayList<>();
+//        EntityManager em = getEntityManager();
+//        Query query = em.createNamedQuery("MOffice.findByParentId");
+//        query.setParameter("parent_id", parentId);
+//        try {
+//            userList = query.getResultList();
+//            LOG.log(Level.FINE, "offices found for parentId {0}", new Object[]{parentId});
+//        } catch (Exception ex) {
+//            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
+//            return null;
+//            // don't throw WebApplicationException, force caller to handle this
+//        } finally {
+//            LOG.log(Level.FINER, "closing entity manager {0}", em);
+//            em.close();
+//        }
+//        return userList;
+//    }
 
     public int getCount() {
         EntityManager em = getEntityManager();
