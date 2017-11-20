@@ -37,6 +37,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
     @Override
     public _Account create(_Account entity) {
 
+        try {
         //todo: person
         Person person = null;
 
@@ -45,11 +46,17 @@ public class GeneralAccountService extends AbstractService<_Account> {
         accounts.setExternalid(getNewExternalId());
 
         accounts.setAccountType(entity.getAccounttype().toString());
-        accounts.setStatus(entity.getStatus());
+        accounts.setStatus(entity.getStatus().toString());
 
+        //todo: create General Account :: 
+        GeneralAccounts account = controller.create(accounts);
         //todo: create a user
+
         //todo:: assign user role
         return entity;
+        } catch (Exception e) {
+            throw e;
+        }
     }
     
 }
