@@ -7,6 +7,7 @@ package com.codemovers.scholar.v1.backoffice.api.v1.accounts;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
+import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
@@ -59,6 +60,8 @@ public class GeneralAccountService extends AbstractService<_Account> {
             user.setUsername(entity.getUsername());
             user.setPassword(entity.getPassword());
             user.setStatus(StatusEnum.ACTIVE.toString());
+
+            user = UserService.getInstance().create(user);
 
             //todo:: assign user roleF
             return entity;

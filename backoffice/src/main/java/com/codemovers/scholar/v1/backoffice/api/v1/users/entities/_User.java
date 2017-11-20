@@ -31,6 +31,8 @@ public class _User extends AbstractEntity {
     private Date datecreated;
     private String status;
 
+    private String role;
+
     public _User() {
     }
 
