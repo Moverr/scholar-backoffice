@@ -10,6 +10,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountServic
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
+import com.codemovers.scholar.v1.backoffice.db.entities.UserRole;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 
@@ -49,7 +50,8 @@ public class UserService extends AbstractService<_User> {
         user.setUsername(entity.getUsername());
         StatusEnum statusEnum = StatusEnum.fromString(entity.getStatus());
 
-        // todo :  crerate new user and return user ::
+        UserRole role
+                =        // todo :  crerate new user and return user ::
         Users users = controller.create(user);
         return populateResponse(users);
 

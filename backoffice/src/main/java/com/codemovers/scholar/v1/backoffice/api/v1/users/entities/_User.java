@@ -96,6 +96,14 @@ public class _User extends AbstractEntity {
         this.status = status;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;

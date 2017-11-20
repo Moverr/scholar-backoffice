@@ -12,9 +12,12 @@ import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
+import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -61,7 +64,37 @@ public class GeneralAccountService extends AbstractService<_Account> {
             user.setPassword(entity.getPassword());
             user.setStatus(StatusEnum.ACTIVE.toString());
 
+            if (accounts.getAccountType() != null) {
+                switch (accounts.getAccountType()) {
+
+                    case "PERSON":
+                        user.setRole("ADMIN");
+                        break;
+
+                    case "COMPANY":
+                        user.setRole("ADMIN");
+                        break;
+
+                    case "ORGANISATION":
+                        user.setRole("ADMIN");
+                        break;
+
+
+                    default:
+                        break;
+                }
+
+            }
+
+//         
+//            if (accounts.getAccountType().equalsIgnoreCase("")) {
+//
+//            }
+
             user = UserService.getInstance().create(user);
+            List<Users> users_ = new ArrayList<>();
+//            users_.add(user);
+            account.setUsersCollection(users_);
 
             //todo:: assign user roleF
             return entity;
