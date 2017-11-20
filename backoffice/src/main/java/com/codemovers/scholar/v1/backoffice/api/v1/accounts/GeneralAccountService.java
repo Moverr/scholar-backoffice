@@ -12,6 +12,7 @@ import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaCont
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
+import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 
 /**
@@ -68,7 +69,12 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
     @Override
     public _Account getById(Integer Id) {
-        GeneralAccounts account = controller.find(Id);
+        GeneralAccounts account = controller.findAccount(Id);
+
+        _Account a = new _Account();
+        a.setAccountid(account.getId().intValue());
+        a.setExternalid(account.getExternalid());
+        a.setAccounttype(AccountType.fromString(account.getAccountType()));
 
         return null;
 

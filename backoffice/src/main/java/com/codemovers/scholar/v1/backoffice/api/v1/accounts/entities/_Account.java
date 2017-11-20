@@ -28,6 +28,8 @@ public class _Account {
     private String externalid;
     private String date_created;
 
+    private Integer id;
+
     public _Account() {
     }
 
@@ -95,17 +97,26 @@ public class _Account {
         this.date_created = date_created;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.accounttype);
-        hash = 59 * hash + Objects.hashCode(this.username);
-        hash = 59 * hash + Objects.hashCode(this.password);
-        hash = 59 * hash + Objects.hashCode(this.emailaddress);
-        hash = 59 * hash + Objects.hashCode(this.accountid);
-        hash = 59 * hash + Objects.hashCode(this.status);
-        hash = 59 * hash + Objects.hashCode(this.externalid);
-        hash = 59 * hash + Objects.hashCode(this.date_created);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.accounttype);
+        hash = 29 * hash + Objects.hashCode(this.username);
+        hash = 29 * hash + Objects.hashCode(this.password);
+        hash = 29 * hash + Objects.hashCode(this.emailaddress);
+        hash = 29 * hash + Objects.hashCode(this.accountid);
+        hash = 29 * hash + Objects.hashCode(this.status);
+        hash = 29 * hash + Objects.hashCode(this.externalid);
+        hash = 29 * hash + Objects.hashCode(this.date_created);
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -133,16 +144,22 @@ public class _Account {
         if (!Objects.equals(this.accountid, other.accountid)) {
             return false;
         }
-        if (!Objects.equals(this.status, other.status)) {
-            return false;
-        }
         if (!Objects.equals(this.externalid, other.externalid)) {
             return false;
         }
         if (!Objects.equals(this.date_created, other.date_created)) {
             return false;
         }
-        return this.accounttype == other.accounttype;
+        if (this.accounttype != other.accounttype) {
+            return false;
+        }
+        if (this.status != other.status) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -157,9 +174,8 @@ public class _Account {
                 + ", status=" + status
                 + ", externalid=" + externalid
                 + ", date_created=" + date_created
+                + ", id=" + id
                 + "}";
     }
-
-
 
 }
