@@ -19,6 +19,15 @@ public class GeneralAccountJpaController extends JpaController {
 
     protected static final Logger LOG = Logger.getLogger(GeneralAccountJpaController.class.getName());
 
+    private static GeneralAccountJpaController controller = null;
+
+    public static GeneralAccountJpaController getInstance() {
+        if (controller == null) {
+            controller = new GeneralAccountJpaController();
+        }
+        return controller;
+    }
+
 
     public GeneralAccountJpaController() {
         super(GeneralAccounts.class);

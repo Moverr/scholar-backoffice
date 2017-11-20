@@ -58,7 +58,7 @@ public class UserService extends AbstractService<_User> {
         user.setAccount_id(users.getAccount().getId().intValue());
         user.setUsername(users.getUsername());
         user.setStatus(users.getStatus());
-
+        user.setDatecreated(users.getDateCreated());
         return user;
     }
 
