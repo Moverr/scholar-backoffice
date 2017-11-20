@@ -37,7 +37,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
     }
 
     @Override
-    public _Account create(_Account entity) {
+    public _Account create(_Account entity) throws Exception {
 
         try {
             //todo: person
@@ -68,7 +68,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
     }
 
     @Override
-    public _Account getById(Integer Id) {
+    public _Account getById(Integer Id) throws Exception {
         GeneralAccounts account = controller.findAccount(Id);
 
         _Account a = new _Account();
@@ -79,5 +79,12 @@ public class GeneralAccountService extends AbstractService<_Account> {
         return a;
 
     }
+
+    public GeneralAccounts getGneralAccountById(Integer Id) throws Exception {
+        GeneralAccounts account = controller.findAccount(Id);
+        return account;
+
+    }
+
 
 }
