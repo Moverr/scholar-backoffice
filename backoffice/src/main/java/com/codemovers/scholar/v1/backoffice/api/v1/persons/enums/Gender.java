@@ -37,11 +37,11 @@ public enum Gender {
         return value;
     }
 
-    public static Gender fromInt(final Integer accountType) {
+    public static Gender fromInt(final Integer gender) {
         Gender _gender = Gender.INVALID;
 
-        if (accountType != null) {
-            switch (accountType) {
+        if (gender != null) {
+            switch (gender) {
                 case 1:
                     _gender = Gender.MALE;
                     break;

@@ -36,11 +36,11 @@ public enum MaritalStatus {
         return value;
     }
 
-    public static MaritalStatus fromInt(final Integer accountType) {
+    public static MaritalStatus fromInt(final Integer maritalstatus) {
         MaritalStatus _marital_status = MaritalStatus.INVALID;
 
-        if (accountType != null) {
-            switch (accountType) {
+        if (maritalstatus != null) {
+            switch (maritalstatus) {
                 case 1:
                     _marital_status = MaritalStatus.SINGLE;
                     break;
