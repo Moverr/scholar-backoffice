@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -417,5 +418,10 @@ Using SHA-256 :
     }
 
 
+    public static String getNewExternalId() {
+        LOG.fine("get new External Id ");
+        //return WebserviceConnection.ID_GENERATOR.get(String.class, "/", "token", "ABCD");
+        return new BigInteger(Long.toString(System.currentTimeMillis() - 1000000000000L)).toString(36).toUpperCase();
+    }
 
 }

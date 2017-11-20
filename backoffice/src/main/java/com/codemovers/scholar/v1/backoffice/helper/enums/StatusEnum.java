@@ -11,7 +11,7 @@ package com.codemovers.scholar.v1.backoffice.helper.enums;
  */
 public enum StatusEnum {
 
-    ACTIVE, DEACTIVATED, PENDING, ARCHIVED;
+    ACTIVE, DEACTIVATED, PENDING, ARCHIVED, APPROVED, REJECTED, UNDER_INVESTIGATION;
 
     public static final StatusEnum fromString(String text) {
         StatusEnum returnValue = PENDING;

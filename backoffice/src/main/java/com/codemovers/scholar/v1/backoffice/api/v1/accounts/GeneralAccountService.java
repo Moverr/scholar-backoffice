@@ -10,6 +10,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
+import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 
 /**
  *
@@ -41,6 +42,10 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
         //todo : create a general account
         accounts = new GeneralAccounts();
+        accounts.setExternalid(getNewExternalId());
+
+        accounts.setAccountType(entity.getAccounttype().toString());
+        accounts.setStatus(entity.getStatus());
 
         //todo: create a user
         //todo:: assign user role
