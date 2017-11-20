@@ -64,7 +64,7 @@ public class EntityManagerFactoryProvider {
         properties.put("hibernate.ejb.entitymanager_factory_name", getDatabase());
         try{
             // properties
-            emf = Persistence.createEntityManagerFactory("MYPROPERTY",properties);
+            emf = Persistence.createEntityManagerFactory("myproperty", properties);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class EntityManagerFactoryProvider {
     }
 
     private String getDatabase() {
-        return "my_property";
+        return "scholar-backoffice";
     }
 
 

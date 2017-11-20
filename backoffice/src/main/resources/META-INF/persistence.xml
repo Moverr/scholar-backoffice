@@ -1,40 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="MYPROPERTY" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="myproperty" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <!--    <class>myproperty._entities.Subscription</class>
-    <class>myproperty._entities.Person</class>
-    <class>myproperty._entities.AccountType</class>
-    <class>myproperty._entities.Account</class>
-    <class>myproperty._entities.Address</class>
-    <class>myproperty._entities.Categories</class>
-    <class>myproperty._entities.Rating</class>
-    <class>myproperty._entities.Permissions</class>
-    <class>myproperty._entities.RolePermission</class>
-    <class>myproperty._entities.Types</class>
-    <class>myproperty._entities.Roles</class>
-    <class>myproperty._entities.Images</class>
-    <class>myproperty._entities.UserRole</class>
-    <class>myproperty._entities.Property</class>
-    <class>myproperty._entities.SubscriptionPermission</class>
-    <class>myproperty._entities.Reviews</class>-->
-    <!--    <class>myproperty._entities.User</class>-->
-    <!--    <class>myproperty.v1._entities.Contacts_1</class>-->
-    <class>myproperty.v1.db._entities.Address</class>
-    <class>myproperty.v1.db._entities.Packages</class>
-    <class>myproperty.v1.db._entities.Contacts</class>
-    <class>myproperty.v1.db._entities.Person</class>
-    <class>myproperty.v1.db._entities.User</class>
-    <class>myproperty.v1.db._entities.PropertySize</class>
-    <class>myproperty.v1.db._entities.PropertyTypes</class>
-    <class>myproperty.v1.db._entities.AccountTypes</class>
-    <class>myproperty.v1.db._entities.PropertyClassification</class>
-    <class>myproperty.v1.db._entities.Property</class>
-    <class>myproperty.v1.db._entities.Accounts</class>
-    <class>myproperty.v1.db._entities.PermissionRole</class>
-    <class>myproperty.v1.db._entities.Roles</class>
-    <class>myproperty.v1.db._entities.UserRole</class>
-    <class>myproperty.v1.db._entities.Permissions</class>
+
     <class>com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts</class>
     <class>com.codemovers.scholar.v1.backoffice.db.entities.Person</class>
     <class>com.codemovers.scholar.v1.backoffice.db.entities.Permissions</class>
@@ -45,7 +13,7 @@
     <class>com.codemovers.scholar.v1.backoffice.db.entities.UserRole</class>
     <class>com.codemovers.scholar.v1.backoffice.db.entities.Roles</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/scholar-backoffice"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="mysql"/>

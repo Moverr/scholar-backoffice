@@ -9,6 +9,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -30,7 +31,10 @@ import javax.ws.rs.core.Response;
 public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     private static final Logger LOG = Logger.getLogger(AbstractEndpoint.class.getName());
 
+    GeneralAccountService service;
+
     public GeneralAccountsEndpoint() {
+        service = new GeneralAccountService();
     }
 
     @POST
@@ -39,10 +43,16 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     @Override
     public _Account create(_Account entity) {
 
-        LOG.log(Level.INFO, "Create General Account Endpoint ");
+        try {
+            LOG.log(Level.INFO, "Create General Account Endpoint ");
 
-        //todo: assign role to connector ::
-        return entity;
+            entity = service.create(entity);
+            //todo: assign role to connector ::
+            return entity;
+        } catch (Exception ex) {
+            Logger.getLogger(GeneralAccountsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Something Went Wrong ");
+        }
     }
 
 

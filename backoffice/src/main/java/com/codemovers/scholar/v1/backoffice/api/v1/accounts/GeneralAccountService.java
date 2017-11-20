@@ -52,7 +52,9 @@ public class GeneralAccountService extends AbstractService<_Account> {
             accounts.setExternalid(getNewExternalId());
 
             accounts.setAccountType(entity.getAccounttype().toString());
-            accounts.setStatus(entity.getStatus().toString());
+
+            //accounts.setStatus(entity.getStatus().toString());
+            accounts.setStatus("ACTIVE");
 
             //todo: create General AcFcount ::
             GeneralAccounts account = controller.create(accounts);

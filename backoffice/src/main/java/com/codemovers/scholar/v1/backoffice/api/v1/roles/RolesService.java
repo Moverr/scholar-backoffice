@@ -7,10 +7,9 @@ package com.codemovers.scholar.v1.backoffice.api.v1.roles;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.roles.entities._Role;
-import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
 import com.codemovers.scholar.v1.backoffice.db.controllers.RoleJpaController;
-import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
+import java.util.List;
 
 /**
  *
@@ -46,7 +45,7 @@ public class RolesService extends AbstractService<_Role> {
         return null;
     }
 
-    public List<Roles> getRoleByName(String name) throws Exception {
+    public Roles getRoleByName(String name) throws Exception {
 
         return controller.findByName(name);
 

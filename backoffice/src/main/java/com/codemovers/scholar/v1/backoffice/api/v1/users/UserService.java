@@ -5,20 +5,15 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.users;
 
-import com.amazonaws.services.identitymanagement.model.Role;
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountService;
+import com.codemovers.scholar.v1.backoffice.api.v1.roles.RolesService;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
-import com.codemovers.scholar.v1.backoffice.db.entities.UserRole;
+import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -56,7 +51,8 @@ public class UserService extends AbstractService<_User> {
         user.setUsername(entity.getUsername());
         StatusEnum statusEnum = StatusEnum.fromString(entity.getStatus());
 
-        Role _role = new Role();
+        Roles _role = RolesService.getInstance().getRoleByName(entity.getRole());
+
         user.addRole(_role);
         // UserRole role        // todo :  crerate new user and return user ::
         Users users = controller.create(user);
