@@ -22,7 +22,7 @@ public class _Account {
     private String username;
     private String password;
     private String emailaddress;
-    private String accountid;
+
 
     private StatusEnum status;
     private String externalid;
@@ -65,13 +65,6 @@ public class _Account {
         this.emailaddress = emailaddress;
     }
 
-    public String getAccountid() {
-        return accountid;
-    }
-
-    public void setAccountid(String accountid) {
-        this.accountid = accountid;
-    }
 
     public StatusEnum getStatus() {
         return status;
@@ -112,7 +105,7 @@ public class _Account {
         hash = 29 * hash + Objects.hashCode(this.username);
         hash = 29 * hash + Objects.hashCode(this.password);
         hash = 29 * hash + Objects.hashCode(this.emailaddress);
-        hash = 29 * hash + Objects.hashCode(this.accountid);
+
         hash = 29 * hash + Objects.hashCode(this.status);
         hash = 29 * hash + Objects.hashCode(this.externalid);
         hash = 29 * hash + Objects.hashCode(this.date_created);
@@ -141,9 +134,7 @@ public class _Account {
         if (!Objects.equals(this.emailaddress, other.emailaddress)) {
             return false;
         }
-        if (!Objects.equals(this.accountid, other.accountid)) {
-            return false;
-        }
+
         if (!Objects.equals(this.externalid, other.externalid)) {
             return false;
         }
@@ -170,7 +161,6 @@ public class _Account {
                 + ", username=" + username
                 + ", password=" + password
                 + ", emailaddress=" + emailaddress
-                + ", accountid=" + accountid
                 + ", status=" + status
                 + ", externalid=" + externalid
                 + ", date_created=" + date_created

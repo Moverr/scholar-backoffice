@@ -72,11 +72,11 @@ public class GeneralAccountService extends AbstractService<_Account> {
         GeneralAccounts account = controller.findAccount(Id);
 
         _Account a = new _Account();
-        a.setAccountid(account.getId().intValue());
+        a.setId(account.getId().intValue());
         a.setExternalid(account.getExternalid());
         a.setAccounttype(AccountType.fromString(account.getAccountType()));
 
-        return null;
+        return a;
 
     }
 
