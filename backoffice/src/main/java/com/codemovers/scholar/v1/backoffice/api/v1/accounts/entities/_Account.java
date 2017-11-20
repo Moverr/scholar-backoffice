@@ -6,6 +6,7 @@
 package com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities;
 
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
+import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ public class _Account {
     private String emailaddress;
     private String accountid;
 
-    private String status;
+    private StatusEnum status;
     private String externalid;
     private String date_created;
 
@@ -70,11 +71,11 @@ public class _Account {
         this.accountid = accountid;
     }
 
-    public String getStatus() {
+    public StatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusEnum status) {
         this.status = status;
     }
 
