@@ -5,6 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.users;
 
+import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountService;
 import com.codemovers.scholar.v1.backoffice.api.v1.roles.RolesService;
@@ -14,12 +15,16 @@ import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author MOver 11/19/2017
  */
 public class UserService extends AbstractService<_User> {
+
+    private static final Logger LOG = Logger.getLogger(UserService.class.getName());
 
     private final UserJpaController controller;
 
@@ -44,22 +49,29 @@ public class UserService extends AbstractService<_User> {
         Users user = new Users();
 
         // get General Account by Id 
-        GeneralAccounts account = GeneralAccountService.getInstance().getGneralAccountById(entity.getAccount_id());
+        GeneralAccounts account = new GeneralAccounts(entity.getAccount_id());
+
+        //GeneralAccountService.getInstance().getGneralAccountById(entity.getAccount_id());
 
         user.setAccount(account);
         user.setPassword(entity.getPassword());
         user.setUsername(entity.getUsername());
-        StatusEnum statusEnum = StatusEnum.fromString(entity.getStatus());
+        // StatusEnum statusEnum = StatusEnum.fromString(entity.getStatus());
+        user.setStatus("ACTIVE");
 
-        Roles _role = RolesService.getInstance().getRoleByName(entity.getRole());
+        Roles _role = RolesService.getInstance().getRoleByName("ADMIN");
 
-        user.addRole(_role);
+        LOG.log(Level.INFO, _role.getCode());
+
         // UserRole role        // todo :  crerate new user and return user ::
         Users users = controller.create(user);
+
+        //todo: assign roles 
 
         return populateResponse(users);
 
     }
+
 
     private _User populateResponse(Users users) throws Exception {
 

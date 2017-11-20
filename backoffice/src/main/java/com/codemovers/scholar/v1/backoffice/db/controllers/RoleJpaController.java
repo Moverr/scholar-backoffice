@@ -113,14 +113,13 @@ public class RoleJpaController extends JpaController {
         return findRoleEntities(false, maxResults, firstResult);
     }
 
-    public Roles findByName(String name) {
+    public List<Roles> findByName(String name) {
         List<Roles> RoleList = new ArrayList<>();
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Roles.findByName");
         query.setParameter("name", name);
         try {
             RoleList = query.getResultList();
-            return RoleList.get(0);
 
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
@@ -130,6 +129,8 @@ public class RoleJpaController extends JpaController {
             LOG.log(Level.FINER, "closing entity manager {0}", em);
             em.close();
         }
+
+        return RoleList;
 
     }
 

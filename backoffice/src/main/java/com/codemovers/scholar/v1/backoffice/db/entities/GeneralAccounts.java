@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -41,10 +43,10 @@ public class GeneralAccounts implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Size(max = 12)
     @Column(name = "account_type")
     private String accountType;
@@ -65,20 +67,20 @@ public class GeneralAccounts implements Serializable {
     public GeneralAccounts() {
     }
 
-    public GeneralAccounts(Long id) {
+    public GeneralAccounts(Integer id) {
         this.id = id;
     }
 
-    public GeneralAccounts(Long id, Date dateCreated) {
+    public GeneralAccounts(Integer id, Date dateCreated) {
         this.id = id;
         this.dateCreated = dateCreated;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -17,6 +17,7 @@ import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExtern
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,6 +57,8 @@ public class GeneralAccountService extends AbstractService<_Account> {
             //accounts.setStatus(entity.getStatus().toString());
             accounts.setStatus("ACTIVE");
 
+            accounts.setDateCreated(new Date());
+
             //todo: create General AcFcount ::
             GeneralAccounts account = controller.create(accounts);
             //todo: create a user
@@ -69,7 +72,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
             if (accounts.getAccountType() != null) {
                 switch (accounts.getAccountType()) {
 
-                    case "PERSON":
+                    case "NORMAL":
                         user.setRole("ADMIN");
                         break;
 
@@ -83,6 +86,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
 
                     default:
+                        user.setRole("ADMIN");
                         break;
                 }
 

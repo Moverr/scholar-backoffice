@@ -11,7 +11,7 @@ package com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.enums;
  */
 public enum accountTypes {
     INVALID(0, "INVALID", "invalid"),
-    PERSON(1, "PERSON", "person"),
+    NORMAL(1, "NORMAL", "normal"),
     ORGANISATION(2, "ORGANISATION", "organisation"),
     COMPANY(3, "COMPANY", "company"),
     SCHOLAR(4, "SCHOLAR", "scholar");
@@ -44,7 +44,7 @@ public enum accountTypes {
         if (accountType != null) {
             switch (accountType) {
                 case 1:
-                    _accountType = accountTypes.PERSON;
+                    _accountType = accountTypes.NORMAL;
                     break;
                 case 2:
                     _accountType = accountTypes.ORGANISATION;
