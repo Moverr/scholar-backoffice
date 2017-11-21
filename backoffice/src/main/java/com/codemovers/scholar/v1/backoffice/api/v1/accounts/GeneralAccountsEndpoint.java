@@ -8,6 +8,8 @@ package com.codemovers.scholar.v1.backoffice.api.v1.accounts;
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.LoginResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
+import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._login;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,6 +36,9 @@ import javax.ws.rs.core.Response;
 @Path("/")
 public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     private static final Logger LOG = Logger.getLogger(AbstractEndpoint.class.getName());
+
+    @Context
+    private ContainerRequestContext context;
 
     GeneralAccountService service;
 
@@ -99,12 +105,20 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @POST
+    @Path("login/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public LoginResponse login(
-            @HeaderParam("tenantId") String tenantId,
-            @HeaderParam("username") String username,
-            @HeaderParam("password") String password,
+            _login login,
             @Context HttpServletRequest httpRequest
     ) {
+        String logId = context.getProperty("logId").toString();
+
+        Utilities.logHttpServletRequest(httpRequest, logId);
+        LOG.log(Level.INFO, "{0} :: start", new Object[]{logId});
+
+        service.login(login, logId);
 
         return null;
     }

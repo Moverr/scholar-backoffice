@@ -16,7 +16,9 @@ import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
 import com.codemovers.scholar.v1.backoffice.db.entities.UserRole;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
+import com.codemovers.scholar.v1.backoffice.helper.exceptions.BadRequestException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,9 +56,15 @@ public class UserService extends AbstractService<_User> {
         GeneralAccounts account = new GeneralAccounts(entity.getAccount_id());
 
         //GeneralAccountService.getInstance().getGneralAccountById(entity.getAccount_id());
+        {
+            if (entity.getPassword() == null || entity.getUsername() == null) {
+                throw new BadRequestException("USERNAME AND OR PASSWORD IS MANDATORY ");
+            }
+        }
 
         user.setAccount(account);
-        user.setPassword(entity.getPassword());
+        String password = Utilities.encryptPassword_md5(entity.getPassword());
+        user.setPassword(password);
         user.setUsername(entity.getUsername());
         // StatusEnum statusEnum = StatusEnum.fromString(entity.getStatus());
         user.setStatus("ACTIVE");

@@ -5,13 +5,19 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities;
 
+import com.codemovers.scholar.v1.backoffice.api.annotation.Mandatory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  *
  * @author mover
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class _login {
-    private String username;
-    private String password;
+    private @Mandatory
+    String username;
+    private @Mandatory
+    String password;
 
     public _login() {
     }

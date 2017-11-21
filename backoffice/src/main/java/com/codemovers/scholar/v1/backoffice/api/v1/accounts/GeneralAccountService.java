@@ -7,18 +7,21 @@ package com.codemovers.scholar.v1.backoffice.api.v1.accounts;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
+import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._login;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.ws.rs.BadRequestException;
 
 /**
  *
@@ -126,6 +129,22 @@ public class GeneralAccountService extends AbstractService<_Account> {
         GeneralAccounts account = controller.findAccount(Id);
         return account;
 
+    }
+
+    public void login(_login login, String logId) {
+
+        {
+            if (login.getPassword() != null && login.getUsername() != null) {
+                // todo : encrypt password
+             String encryptedPassword = Utilities.encryptPassword_md5(login.getPassword());
+
+                //todo : check username and password 
+            } else {
+                throw new BadRequestException(" USERNAME AND OR PASSWORD IS MANDATORY  ");
+            }
+
+        }
+        //todo: 
     }
 
 

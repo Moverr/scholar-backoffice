@@ -135,6 +135,31 @@ public class UserJpaController extends JpaController {
         return userList;
     }
 
+    public Users login(String username, String passowrd) {
+
+        Users users = null;
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Users.login");
+        query.setParameter("username", username);
+        query.setParameter("passowrd", passowrd);
+        try {
+            users = (Users) query.getSingleResult();
+            LOG.log(Level.FINE, " User with username {0} found ", new Object[]{username});
+
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
+            return null;
+        } finally {
+            LOG.log(Level.FINER, "closing entity manager {0}", em);
+            em.close();
+        }
+
+
+        return users;
+
+    }
+
+
     public Users findByExternalId(String externalId) {
         Users userList = new Users();
         EntityManager em = getEntityManager();
@@ -153,6 +178,7 @@ public class UserJpaController extends JpaController {
         }
         return userList;
     }
+
 
 //    public List<Users> findByHeirarchy(String heirarchy) {
 //        List<Users> userList = new ArrayList<>();
