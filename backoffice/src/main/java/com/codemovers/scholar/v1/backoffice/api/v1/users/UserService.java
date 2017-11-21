@@ -99,9 +99,18 @@ public class UserService extends AbstractService<_User> {
         return user;
     }
 
+    public Users login(String username, String password, String logid) throws Exception {
+
+        String encryptedPassword = Utilities.encryptPassword_md5(password);
+        Users user = controller.login(username, encryptedPassword);
+        return user;
+
+    }
+
     @Override
     public _User getById(Integer Id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
 }

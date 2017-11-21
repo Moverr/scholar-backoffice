@@ -136,7 +136,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
         {
             if (login.getPassword() != null && login.getUsername() != null) {
                 // todo : encrypt password
-             String encryptedPassword = Utilities.encryptPassword_md5(login.getPassword());
+            UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
 
                 //todo : check username and password 
             } else {
