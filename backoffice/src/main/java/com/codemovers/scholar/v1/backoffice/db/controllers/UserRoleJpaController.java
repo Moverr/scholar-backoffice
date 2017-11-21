@@ -45,7 +45,7 @@ public class UserRoleJpaController extends JpaController {
             em.persist(entity);
             em.getTransaction().commit();
         } catch (Exception eml) {
-            LOG.log(Level.INFO, eml.toString());
+            LOG.log(Level.INFO, "ERROR USEROLE {0} ", Utilities.getStackTrace(eml));
             throw eml;
         } finally {
             if (em != null) {

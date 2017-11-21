@@ -66,7 +66,7 @@ public class Roles implements Serializable {
     private Date dateCreated;
     @Column(name = "author_id")
     private BigInteger authorId;
-    @OneToMany(mappedBy = "roleId")
+    @OneToMany(mappedBy = "role")
     private Collection<UserRole> userRoleCollection;
     @OneToMany(mappedBy = "roleId")
     private Collection<RolePermission> rolePermissionCollection;

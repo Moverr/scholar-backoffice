@@ -41,10 +41,10 @@ public class UserRole implements Serializable {
     private Long id;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
-    private Users userId;
+    private Users user;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
-    private Roles roleId;
+    private Roles role;
 
     public UserRole() {
     }
@@ -61,20 +61,20 @@ public class UserRole implements Serializable {
         this.id = id;
     }
 
-    public Users getUserId() {
-        return userId;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUserId(Users userId) {
-        this.userId = userId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public Roles getRoleId() {
-        return roleId;
+    public Roles getRole() {
+        return role;
     }
 
-    public void setRoleId(Roles roleId) {
-        this.roleId = roleId;
+    public void setRole(Roles role) {
+        this.role = role;
     }
 
     @Override
@@ -99,8 +99,8 @@ public class UserRole implements Serializable {
         return this.getClass().getCanonicalName()
                 + "{"
                 + "id=" + id
-                + ", userId=" + userId
-                + ", roleId=" + roleId
+                + ", userId=" + user
+                + ", roleId=" + role
                 + "}";
     }
 

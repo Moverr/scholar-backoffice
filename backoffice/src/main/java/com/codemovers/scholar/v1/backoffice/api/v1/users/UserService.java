@@ -11,8 +11,10 @@ import com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountServic
 import com.codemovers.scholar.v1.backoffice.api.v1.roles.RolesService;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
+import com.codemovers.scholar.v1.backoffice.db.controllers.UserRoleJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
+import com.codemovers.scholar.v1.backoffice.db.entities.UserRole;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import java.util.logging.Level;
@@ -66,6 +68,11 @@ public class UserService extends AbstractService<_User> {
         // UserRole role        // todo :  crerate new user and return user ::
         Users users = controller.create(user);
 
+        UserRole userRole = new UserRole();
+        userRole.setRole(_role);
+        userRole.setUser(users);
+
+        UserRoleJpaController.getInstance().create(userRole);
         //todo: assign roles 
 
         return populateResponse(users);
