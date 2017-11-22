@@ -5,9 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.users;
 
-import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
-import com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountService;
 import com.codemovers.scholar.v1.backoffice.api.v1.roles.RolesService;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
@@ -17,10 +15,11 @@ import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
 import com.codemovers.scholar.v1.backoffice.db.entities.UserRole;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import com.codemovers.scholar.v1.backoffice.helper.Utilities;
-import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import com.codemovers.scholar.v1.backoffice.helper.exceptions.BadRequestException;
+import static com.mchange.v2.c3p0.impl.C3P0Defaults.password;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.sonatype.plexus.components.cipher.Base64;
 
 /**
  *
@@ -92,18 +91,26 @@ public class UserService extends AbstractService<_User> {
 
         _User user = new _User();
         user.setId(users.getId().intValue());
-        user.setAccount_id(users.getAccount().getId().intValue());
+        user.setAccount_id(users.getAccount().getId());
         user.setUsername(users.getUsername());
         user.setStatus(users.getStatus());
         user.setDatecreated(users.getDateCreated());
         return user;
     }
 
-    public Users login(String username, String password, String logid) throws Exception {
+    //todo: retrieve authentication 
+    public String login(String username, String password, String logid) throws Exception {
+
+        String authentication = null;
 
         String encryptedPassword = Utilities.encryptPassword_md5(password);
         Users user = controller.login(username, encryptedPassword);
-        return user;
+
+        if (user != null) {
+            authentication = convertToBasicAuth(user.getUsername(), user.getPassword());
+        }
+
+        return authentication;
 
     }
 
@@ -112,5 +119,13 @@ public class UserService extends AbstractService<_User> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private String convertToBasicAuth(String username, String Password) {
+        String authString = username + ":" + Password;
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        return ("Basic " + authStringEnc);
+        //  String possibleAuthenticationKey = "Basic " + Base64.getEncoder().encodeToString(usernamePassowrd.trim().getBytes());
+
+    }
 
 }

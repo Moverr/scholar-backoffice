@@ -131,19 +131,28 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
     }
 
-    public void login(_login login, String logId) {
+    public Users login(_login login, String logId) throws Exception {
+
+        Users login1 = null;
 
         {
             if (login.getPassword() != null && login.getUsername() != null) {
                 // todo : encrypt password
-            UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
+                  login1 = UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
 
-                //todo : check username and password 
+                if (login1 == null) {
+                    throw new BadRequestException("INVALID USERNAME AND OR PASSWORD ");
+                } else {
+                    // create response :: 
+                }
+                //todo : check username and password
             } else {
                 throw new BadRequestException(" USERNAME AND OR PASSWORD IS MANDATORY  ");
             }
 
         }
+
+        return login1;
         //todo: 
     }
 
