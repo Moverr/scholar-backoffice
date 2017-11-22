@@ -7,6 +7,7 @@ package com.codemovers.scholar.v1.backoffice.api.v1.users;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.roles.RolesService;
+import com.codemovers.scholar.v1.backoffice.api.v1.users.entities.UserResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserJpaController;
 import com.codemovers.scholar.v1.backoffice.db.controllers.UserRoleJpaController;
@@ -16,9 +17,7 @@ import com.codemovers.scholar.v1.backoffice.db.entities.UserRole;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import com.codemovers.scholar.v1.backoffice.helper.exceptions.BadRequestException;
-import static com.mchange.v2.c3p0.impl.C3P0Defaults.password;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -29,7 +28,7 @@ import org.sonatype.plexus.components.cipher.Base64;
  *
  * @author MOver 11/19/2017
  */
-public class UserService extends AbstractService<_User> {
+public class UserService extends AbstractService<_User, UserResponse> {
 
     private static final Logger LOG = Logger.getLogger(UserService.class.getName());
 
@@ -49,7 +48,7 @@ public class UserService extends AbstractService<_User> {
     }
 
     @Override
-    public _User create(_User entity) throws Exception {
+    public UserResponse create(_User entity) throws Exception {
         // Validate Mandatories 
         entity.validateMandatory();
 
@@ -103,14 +102,15 @@ public class UserService extends AbstractService<_User> {
     }
 
 
-    private _User populateResponse(Users users) throws Exception {
+    private UserResponse populateResponse(Users users) throws Exception {
         _User user = new _User();
         user.setId(users.getId().intValue());
         user.setAccount_id(users.getAccount().getId());
         user.setUsername(users.getUsername());
         user.setStatus(users.getStatus());
         user.setDatecreated(users.getDateCreated());
-        return user;
+
+        return null;
     }
 
     //todo: retrieve authentication 
@@ -133,7 +133,7 @@ public class UserService extends AbstractService<_User> {
     }
 
     @Override
-    public _User getById(Integer Id) throws Exception {
+    public UserResponse getById(Integer Id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
