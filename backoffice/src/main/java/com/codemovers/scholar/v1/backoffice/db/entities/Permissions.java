@@ -47,8 +47,6 @@ public class Permissions implements Serializable {
     @Size(max = 45)
     @Column(name = "code")
     private String code;
-    @OneToMany(mappedBy = "permissionId")
-    private Collection<RolePermission> rolePermissionCollection;
 
     public Permissions() {
     }
@@ -81,15 +79,6 @@ public class Permissions implements Serializable {
         this.code = code;
     }
 
-    @XmlTransient
-    public Collection<RolePermission> getRolePermissionCollection() {
-        return rolePermissionCollection;
-    }
-
-    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
-        this.rolePermissionCollection = rolePermissionCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -117,7 +106,6 @@ public class Permissions implements Serializable {
                 + "id=" + id
                 + ", name=" + name
                 + ", code=" + code
-                + ", rolePermissionCollection=" + rolePermissionCollection
                 + "}";
     }
 

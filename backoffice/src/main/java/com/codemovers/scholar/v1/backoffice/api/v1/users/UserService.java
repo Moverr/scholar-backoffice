@@ -75,29 +75,30 @@ public class UserService extends AbstractService<_User> {
 
         Roles _role = RolesService.getInstance().getRoleByName("ADMIN");
 
+        Set<Roles> rs = new HashSet<>();
 
-
+        rs.add(_role);
 
         // Set<Roles> rs = new HashMap<Roles>();
-        //user.setRoles(roles);
-        LOG.log(Level.INFO, _role.getCode());
-
         // UserRole role      dsd  // todo :  crerate new user and return user ::
         Users users = controller.create(user);
+        LOG.log(Level.INFO, "USER RESPONSE {0} ", users.toString());
 
         UserRole userRole = new UserRole();
         userRole.setRole(_role);
         userRole.setUser(users);
         UserRoleJpaController.getInstance().create(userRole);
-//        //todo: assign roles
 
-//        Set<UserRole> rs = new HashSet();
-//        rs.add(userRole);
-//        user.setUserRoleCollection(rs);
+        users.setRoles(rs);
 
-        LOG.log(Level.INFO, "USER RESPONSE {0} ", users.toString());
 
-        return populateResponse(users);
+        Users u = controller.findUser(users.getId());
+
+        LOG.log(Level.INFO, "USER RESPONSE {0} ", u.toString());
+
+        //        LOG.log(Level.INFO, "USER RESPONSE {0} ", userRole.toString());
+
+        return populateResponse(u);
 
     }
 

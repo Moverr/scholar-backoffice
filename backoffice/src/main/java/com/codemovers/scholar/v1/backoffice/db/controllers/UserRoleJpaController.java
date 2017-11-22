@@ -89,8 +89,9 @@ public class UserRoleJpaController extends JpaController {
     }
 
     private List<UserRole> findUserRoleEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
         try {
+            em = getEntityManager();
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(UserRole.class));
             Query q = em.createQuery(cq);

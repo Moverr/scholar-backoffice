@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,8 +63,8 @@ public class GeneralAccounts implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @OneToMany(mappedBy = "account")
-    private Collection<Users> usersCollection;
+//    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private Collection<Users> usersCollection;
 
     public GeneralAccounts() {
     }
@@ -116,14 +118,13 @@ public class GeneralAccounts implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    @XmlTransient
-    public Collection<Users> getUsersCollection() {
-        return usersCollection;
-    }
-
-    public void setUsersCollection(Collection<Users> usersCollection) {
-        this.usersCollection = usersCollection;
-    }
+//    public Collection<Users> getUsersCollection() {
+//        return usersCollection;
+//    }
+//
+//    public void setUsersCollection(Collection<Users> usersCollection) {
+//        this.usersCollection = usersCollection;
+//    }
 
     @Override
     public int hashCode() {
@@ -154,7 +155,6 @@ public class GeneralAccounts implements Serializable {
                 + ", status=" + status
                 + ", externalid=" + externalid
                 + ", dateCreated=" + dateCreated
-                + ", usersCollection=" + usersCollection
                 + "}";
     }
 

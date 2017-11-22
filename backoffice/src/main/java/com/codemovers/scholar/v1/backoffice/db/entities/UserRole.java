@@ -42,9 +42,11 @@ public class UserRole implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users user;
+
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private Roles role;
+
 
     public UserRole() {
     }

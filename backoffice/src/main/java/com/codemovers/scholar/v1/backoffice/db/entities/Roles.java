@@ -11,8 +11,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -72,19 +74,22 @@ public class Roles implements Serializable {
     private BigInteger authorId;
 //    @OneToMany(mappedBy = "role")
 //    private Collection<UserRole> userRoleCollection;
-//    @OneToMany(mappedBy = "roleId")
-//    private Collection<RolePermission> rolePermissionCollection;
+    @OneToMany(mappedBy = "role")
+    private Collection<RolePermission> rolePermissionCollection;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "role_permission",
             joinColumns = {
-                @JoinColumn(name = "permission_id")
+                @JoinColumn(name = "role_id")
+
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "role_id")
+                @JoinColumn(name = "permission_id")
             }
     )
     private Set<Permissions> permissions;
+
+
 
 
     public Roles() {
@@ -159,14 +164,22 @@ public class Roles implements Serializable {
 //        this.userRoleCollection = userRoleCollection;
 //    }
 
-//    @XmlTransient
-//    public Collection<RolePermission> getRolePermissionCollection() {
-//        return rolePermissionCollection;
-//    }
-//
-//    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
-//        this.rolePermissionCollection = rolePermissionCollection;
-//    }
+    public Collection<RolePermission> getRolePermissionCollection() {
+        return rolePermissionCollection;
+    }
+
+    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
+        this.rolePermissionCollection = rolePermissionCollection;
+    }
+
+    public Set<Permissions> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<Permissions> permissions) {
+        this.permissions = permissions;
+    }
+
 
     @Override
     public int hashCode() {
@@ -193,10 +206,10 @@ public class Roles implements Serializable {
                 + ", name=" + name
                 + ", code=" + code
                 + ", description=" + description
+                + ", permissions=" + permissions
                 + ", isSystem=" + isSystem
                 + ", dateCreated=" + dateCreated
                 + ", authorId=" + authorId
-                + ", permissions=" + permissions
                 + "}";
     }
 

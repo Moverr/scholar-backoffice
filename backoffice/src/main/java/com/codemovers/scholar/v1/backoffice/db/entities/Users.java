@@ -10,8 +10,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,7 +55,7 @@ public class Users implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Size(max = 255)
     @Column(name = "username")
     private String username;
@@ -77,14 +79,14 @@ public class Users implements Serializable {
     @ManyToOne
     private Person person;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
             joinColumns = {
-                @JoinColumn(name = "role_id")
+                @JoinColumn(name = "user_id")
 
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "user_id")
+                @JoinColumn(name = "role_id")
             }
     )
     private Set<Roles> roles;
@@ -92,15 +94,15 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(Long id) {
+    public Users(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

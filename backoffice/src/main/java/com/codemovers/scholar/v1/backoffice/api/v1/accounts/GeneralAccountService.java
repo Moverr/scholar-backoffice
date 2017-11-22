@@ -103,7 +103,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
             user = UserService.getInstance().create(user);
             List<Users> users_ = new ArrayList<>();
 //            users_.add(user);
-            account.setUsersCollection(users_);
+        //    account.setUsersCollection(users_);
 
             //todo:: assign user roleF
             return entity;
