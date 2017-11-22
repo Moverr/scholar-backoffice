@@ -5,8 +5,8 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.roles;
 
-import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
+import com.codemovers.scholar.v1.backoffice.api.v1.roles.entities.RoleResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.roles.entities._Role;
 import com.codemovers.scholar.v1.backoffice.db.controllers.RoleJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.Roles;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Manny
  */
-public class RolesService extends AbstractService<_Role> {
+public class RolesService extends AbstractService<_Role, RoleResponse> {
     private static final Logger LOG = Logger.getLogger(RolesService.class.getName());
 
     private final RoleJpaController controller;
@@ -38,18 +38,18 @@ public class RolesService extends AbstractService<_Role> {
 
 
     @Override
-    public _Role create(_Role entity) throws Exception {
+    public RoleResponse create(_Role entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public _Role getById(Integer Id) throws Exception {
+    public RoleResponse getById(Integer Id) throws Exception {
         controller.find(Id);
 
         return null;
     }
 
-    public Roles getRoleByName(String name) throws Exception {
+    public RoleResponse getRoleByName(String name) throws Exception {
 
         Roles r = null;
         try {
@@ -62,7 +62,7 @@ public class RolesService extends AbstractService<_Role> {
             throw er;
         }
 
-        return r;
+        return null;
     }
 
 }

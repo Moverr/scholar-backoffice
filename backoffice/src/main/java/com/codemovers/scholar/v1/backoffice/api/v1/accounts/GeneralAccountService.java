@@ -103,8 +103,8 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 //            if (accounts.getAccountType().equalsIgnoreCase("")) {
 //
 //            }
-
-            user = UserService.getInstance().create(user);
+//todo: create User
+            UserService.getInstance().create(user);
             List<Users> users_ = new ArrayList<>();
 //            users_.add(user);
         //    account.setUsersCollection(users_);
