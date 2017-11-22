@@ -17,6 +17,10 @@ import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import com.codemovers.scholar.v1.backoffice.helper.exceptions.BadRequestException;
 import static com.mchange.v2.c3p0.impl.C3P0Defaults.password;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.sonatype.plexus.components.cipher.Base64;
@@ -67,18 +71,32 @@ public class UserService extends AbstractService<_User> {
         user.setUsername(entity.getUsername());
         // StatusEnum statusEnum = StatusEnum.fromString(entity.getStatus());
         user.setStatus("ACTIVE");
+        user.setDateCreated(new Date());
 
         Roles _role = RolesService.getInstance().getRoleByName("ADMIN");
 
+
+
+
+        // Set<Roles> rs = new HashMap<Roles>();
+        //user.setRoles(roles);
         LOG.log(Level.INFO, _role.getCode());
 
-        // UserRole role        // todo :  crerate new user and return user ::
+        // UserRole role      dsd  // todo :  crerate new user and return user ::
         Users users = controller.create(user);
+
         UserRole userRole = new UserRole();
         userRole.setRole(_role);
         userRole.setUser(users);
         UserRoleJpaController.getInstance().create(userRole);
-        //todo: assign roles 
+//        //todo: assign roles
+
+//        Set<UserRole> rs = new HashSet();
+//        rs.add(userRole);
+//        user.setUserRoleCollection(rs);
+
+        LOG.log(Level.INFO, "USER RESPONSE {0} ", users.toString());
+
         return populateResponse(users);
 
     }

@@ -59,7 +59,7 @@ public class Person implements Serializable {
     @Size(max = 255)
     @Column(name = "image")
     private String image;
-    @OneToMany(mappedBy = "personId")
+    @OneToMany(mappedBy = "person")
     private Collection<Users> usersCollection;
 
     public Person() {

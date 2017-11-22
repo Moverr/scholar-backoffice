@@ -69,19 +69,22 @@ public class Users implements Serializable {
 //    @OneToMany(mappedBy = "userId")
 //    private Collection<UserRole> userRoleCollection;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
+
     @ManyToOne
     private GeneralAccounts account;
     @JoinColumn(name = "person_id", referencedColumnName = "id")
+
     @ManyToOne
-    private Person personId;
+    private Person person;
 
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = {
-                @JoinColumn(name = "user_id")
+                @JoinColumn(name = "role_id")
+
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "role_id")
+                @JoinColumn(name = "user_id")
             }
     )
     private Set<Roles> roles;
@@ -133,7 +136,6 @@ public class Users implements Serializable {
         this.status = status;
     }
 
-//    @XmlTransient
 //    public Collection<UserRole> getUserRoleCollection() {
 //        return userRoleCollection;
 //    }
@@ -150,12 +152,12 @@ public class Users implements Serializable {
         this.account = account;
     }
 
-    public Person getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonId(Person personId) {
-        this.personId = personId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Set<Roles> getRoles() {
@@ -199,7 +201,7 @@ public class Users implements Serializable {
                 + ", status=" + status
                 + ", roles=" + roles
                 + ", accountId=" + account
-                + ", personId=" + personId
+                + ", personId=" + person
                 + "}";
     }
 
