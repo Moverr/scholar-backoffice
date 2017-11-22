@@ -72,7 +72,8 @@ public class UserService extends AbstractService<_User, UserResponse> {
         user.setStatus("ACTIVE");
         user.setDateCreated(new Date());
 
-        Roles _role = RolesService.getInstance().getRoleByName("ADMIN");
+        Roles _role = null;
+        RolesService.getInstance().getRoleByName("ADMIN");
 
         Set<Roles> rs = new HashSet<>();
 
