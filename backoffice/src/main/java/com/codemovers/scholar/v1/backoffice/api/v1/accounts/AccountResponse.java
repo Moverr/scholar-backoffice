@@ -5,12 +5,11 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.accounts;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
  *
- * @author Mover
+ * @author Mover 11/22/2017
  */
 class AccountResponse {
 

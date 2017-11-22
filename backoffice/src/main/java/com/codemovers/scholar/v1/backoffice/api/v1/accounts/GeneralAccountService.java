@@ -10,6 +10,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.Authenticat
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._login;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
+import com.codemovers.scholar.v1.backoffice.api.v1.users.entities.UserResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
@@ -52,6 +53,8 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
     public AccountResponse create(_Account entity) throws Exception {
 
         try {
+
+            //todo: check to see if there is an email with the same
             //todo: person
             Person person = null;
 
@@ -70,7 +73,7 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
             GeneralAccounts account = controller.create(accounts);
             //todo: create a user
             _User user = new _User();
-            user.setAccount_id(account.getId().intValue());
+            user.setAccount_id(account.getId());
 
             user.setUsername(entity.getUsername());
             user.setPassword(entity.getPassword());
@@ -99,23 +102,29 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
             }
 
-//         
-//            if (accounts.getAccountType().equalsIgnoreCase("")) {
-//
-//            }
-//todo: create User
-            UserService.getInstance().create(user);
-            List<Users> users_ = new ArrayList<>();
-//            users_.add(user);
-        //    account.setUsersCollection(users_);
+            UserResponse userResponse = UserService.getInstance().create(user);
+            String authentication = null;
 
-            //todo:: assign user roleF
-          //  return entity;
-            return null;
+            if (userResponse != null) {
+                authentication = UserService.getInstance().convertToBasicAuth(entity.getUsername(), entity.getPassword());
+            } else {
+                throw new BadRequestException(" Account not succesfully created ");
+            }
+
+            AccountResponse response = new AccountResponse();
+            response.setAccounttype(accounts.getAccountType());
+            response.setUsername(entity.getUsername());
+            response.setEmailaddress(entity.getEmailaddress());
+            response.setStatus(accounts.getStatus());
+            response.setScholarid(accounts.getExternalid());
+            response.setAuthentication(authentication);
+
+            return response;
         } catch (Exception e) {
             throw e;
         }
     }
+
 
     @Override
     public AccountResponse getById(Integer Id) throws Exception {

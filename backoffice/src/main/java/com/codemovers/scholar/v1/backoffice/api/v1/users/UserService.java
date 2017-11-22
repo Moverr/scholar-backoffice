@@ -91,7 +91,7 @@ public class UserService extends AbstractService<_User, UserResponse> {
 
         users.setRoles(rs);
 
-
+        // Get the User Response 
         Users u = controller.findUser(users.getId());
 
         LOG.log(Level.INFO, "USER RESPONSE {0} ", u.toString());
@@ -104,14 +104,15 @@ public class UserService extends AbstractService<_User, UserResponse> {
 
 
     private UserResponse populateResponse(Users users) throws Exception {
-        _User user = new _User();
-        user.setId(users.getId().intValue());
-        user.setAccount_id(users.getAccount().getId());
-        user.setUsername(users.getUsername());
-        user.setStatus(users.getStatus());
-        user.setDatecreated(users.getDateCreated());
 
-        return null;
+        UserResponse response = new UserResponse();
+        response.setId(users.getId());
+        response.setAccountId(users.getAccount().getId());
+        response.setUsername(users.getUsername());
+        response.setStatus(users.getStatus());
+        response.setDateCreated(users.getDateCreated());
+
+        return response;
     }
 
     //todo: retrieve authentication 
@@ -138,7 +139,7 @@ public class UserService extends AbstractService<_User, UserResponse> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private String convertToBasicAuth(String username, String Password) {
+    public String convertToBasicAuth(String username, String Password) {
         String authString = username + ":" + Password;
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
