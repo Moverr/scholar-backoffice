@@ -112,7 +112,7 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     public LoginResponse login(
             _login login,
             @Context HttpServletRequest httpRequest
-    ) {
+    ) throws Exception {
         String logId = context.getProperty("logId").toString();
 
         Utilities.logHttpServletRequest(httpRequest, logId);

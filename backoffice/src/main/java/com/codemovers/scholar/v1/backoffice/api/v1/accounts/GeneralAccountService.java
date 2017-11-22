@@ -131,16 +131,16 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
     }
 
-    public Users login(_login login, String logId) throws Exception {
+    public String login(_login login, String logId) throws Exception {
 
-        Users login1 = null;
+        String Authentication = null;
 
         {
             if (login.getPassword() != null && login.getUsername() != null) {
                 // todo : encrypt password
-                  login1 = UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
+                  Authentication = UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
 
-                if (login1 == null) {
+                if (Authentication == null) {
                     throw new BadRequestException("INVALID USERNAME AND OR PASSWORD ");
                 } else {
                     // create response :: 
@@ -152,7 +152,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
         }
 
-        return login1;
+        return Authentication;
         //todo: 
     }
 

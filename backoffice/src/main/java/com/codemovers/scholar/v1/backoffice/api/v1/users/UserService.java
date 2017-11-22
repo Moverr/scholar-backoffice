@@ -74,21 +74,17 @@ public class UserService extends AbstractService<_User> {
 
         // UserRole role        // todo :  crerate new user and return user ::
         Users users = controller.create(user);
-
         UserRole userRole = new UserRole();
         userRole.setRole(_role);
         userRole.setUser(users);
-
         UserRoleJpaController.getInstance().create(userRole);
         //todo: assign roles 
-
         return populateResponse(users);
 
     }
 
 
     private _User populateResponse(Users users) throws Exception {
-
         _User user = new _User();
         user.setId(users.getId().intValue());
         user.setAccount_id(users.getAccount().getId());
