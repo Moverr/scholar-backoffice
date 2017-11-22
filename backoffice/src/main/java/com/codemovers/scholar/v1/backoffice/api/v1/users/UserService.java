@@ -72,8 +72,7 @@ public class UserService extends AbstractService<_User, UserResponse> {
         user.setStatus("ACTIVE");
         user.setDateCreated(new Date());
 
-        Roles _role = null;
-        RolesService.getInstance().getRoleByName("ADMIN");
+        Roles _role = RolesService.getInstance().getRoleByName("ADMIN");
 
         Set<Roles> rs = new HashSet<>();
 
@@ -143,7 +142,7 @@ public class UserService extends AbstractService<_User, UserResponse> {
         String authString = username + ":" + Password;
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
-        return ("Basic " + authStringEnc);
+        return ("Basic:" + authStringEnc);
         //  String possibleAuthenticationKey = "Basic " + Base64.getEncoder().encodeToString(usernamePassowrd.trim().getBytes());
 
     }

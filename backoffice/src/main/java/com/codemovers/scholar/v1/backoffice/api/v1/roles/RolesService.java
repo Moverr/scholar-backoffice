@@ -49,7 +49,7 @@ public class RolesService extends AbstractService<_Role, RoleResponse> {
         return null;
     }
 
-    public RoleResponse getRoleByName(String name) throws Exception {
+    public Roles getRoleByName(String name) throws Exception {
 
         Roles r = null;
         try {
@@ -62,7 +62,7 @@ public class RolesService extends AbstractService<_Role, RoleResponse> {
             throw er;
         }
 
-        return null;
+        return r;
     }
 
 }
