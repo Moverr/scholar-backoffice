@@ -103,6 +103,9 @@ public class UserService extends AbstractService<_User> {
         Users user = controller.login(username, encryptedPassword);
 
         if (user != null) {
+
+            LOG.log(Level.INFO, "USER RESPONSE {0} ", user.toString());
+
             authentication = convertToBasicAuth(user.getUsername(), user.getPassword());
         }
 

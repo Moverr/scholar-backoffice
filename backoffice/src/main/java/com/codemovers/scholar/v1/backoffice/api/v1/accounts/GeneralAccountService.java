@@ -6,6 +6,7 @@
 package com.codemovers.scholar.v1.backoffice.api.v1.accounts;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
+import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.AuthenticationResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._login;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
@@ -14,7 +15,6 @@ import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaCont
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
-import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
@@ -131,7 +131,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
     }
 
-    public String login(_login login, String logId) throws Exception {
+    public AuthenticationResponse login(_login login, String logId) throws Exception {
 
         String Authentication = null;
 
@@ -152,7 +152,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
 
         }
 
-        return Authentication;
+        return null;
         //todo: 
     }
 

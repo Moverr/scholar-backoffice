@@ -6,7 +6,7 @@
 package com.codemovers.scholar.v1.backoffice.api.v1.accounts;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
-import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.LoginResponse;
+import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.AuthenticationResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._login;
 import com.codemovers.scholar.v1.backoffice.helper.Utilities;
@@ -18,7 +18,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -109,7 +108,7 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     @Path("login/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public LoginResponse login(
+    public AuthenticationResponse login(
             _login login,
             @Context HttpServletRequest httpRequest
     ) throws Exception {

@@ -9,12 +9,16 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -66,10 +70,22 @@ public class Roles implements Serializable {
     private Date dateCreated;
     @Column(name = "author_id")
     private BigInteger authorId;
-    @OneToMany(mappedBy = "role")
-    private Collection<UserRole> userRoleCollection;
-    @OneToMany(mappedBy = "roleId")
-    private Collection<RolePermission> rolePermissionCollection;
+//    @OneToMany(mappedBy = "role")
+//    private Collection<UserRole> userRoleCollection;
+//    @OneToMany(mappedBy = "roleId")
+//    private Collection<RolePermission> rolePermissionCollection;
+
+    @ManyToMany
+    @JoinTable(name = "role_permission",
+            joinColumns = {
+                @JoinColumn(name = "permission_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "role_id")
+            }
+    )
+    private Set<Permissions> permissions;
+
 
     public Roles() {
     }
@@ -134,23 +150,23 @@ public class Roles implements Serializable {
         this.authorId = authorId;
     }
 
-    @XmlTransient
-    public Collection<UserRole> getUserRoleCollection() {
-        return userRoleCollection;
-    }
+//    @XmlTransient
+//    public Collection<UserRole> getUserRoleCollection() {
+//        return userRoleCollection;
+//    }
+//
+//    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
+//        this.userRoleCollection = userRoleCollection;
+//    }
 
-    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
-        this.userRoleCollection = userRoleCollection;
-    }
-
-    @XmlTransient
-    public Collection<RolePermission> getRolePermissionCollection() {
-        return rolePermissionCollection;
-    }
-
-    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
-        this.rolePermissionCollection = rolePermissionCollection;
-    }
+//    @XmlTransient
+//    public Collection<RolePermission> getRolePermissionCollection() {
+//        return rolePermissionCollection;
+//    }
+//
+//    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
+//        this.rolePermissionCollection = rolePermissionCollection;
+//    }
 
     @Override
     public int hashCode() {
@@ -180,8 +196,7 @@ public class Roles implements Serializable {
                 + ", isSystem=" + isSystem
                 + ", dateCreated=" + dateCreated
                 + ", authorId=" + authorId
-                + ", userRoleCollection=" + userRoleCollection
-                + ", rolePermissionCollection=" + rolePermissionCollection
+                + ", permissions=" + permissions
                 + "}";
     }
 
