@@ -10,6 +10,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.Authenticat
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._login;
 import com.codemovers.scholar.v1.backoffice.helper.Utilities;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ import javax.ws.rs.core.Response;
  * @author mover 11/15/2017
  */
 @Path("/")
-public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
+public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account, AccountResponse> {
     private static final Logger LOG = Logger.getLogger(AbstractEndpoint.class.getName());
 
     @Context
@@ -49,14 +50,13 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
-    public _Account create(_Account entity) {
+    public AccountResponse create(_Account entity) {
 
         try {
             LOG.log(Level.INFO, "Create General Account Endpoint ");
 
-            entity = service.create(entity);
-            //todo: assign role to connector ::
-            return entity;
+            return service.create(entity);
+
         } catch (Exception ex) {
             Logger.getLogger(GeneralAccountsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
             throw new BadRequestException("Something Went Wrong ");
@@ -69,7 +69,7 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("update/{id}")
     @Override
-    public _Account update(@PathParam("id") Integer id, _Account entity) {
+    public AccountResponse update(@PathParam("id") Integer id, _Account entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -97,7 +97,7 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account> {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public _Account list(@QueryParam("start") @DefaultValue("0") int start, @QueryParam("end") @DefaultValue("50") int end) {
+    public Collection<AccountResponse> list(@QueryParam("start") @DefaultValue("0") int start, @QueryParam("end") @DefaultValue("50") int end) {
 
         LOG.log(Level.INFO, "INSIDE THE DAMN ");
         return null;

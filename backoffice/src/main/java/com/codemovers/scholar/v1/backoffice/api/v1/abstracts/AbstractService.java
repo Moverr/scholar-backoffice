@@ -9,9 +9,10 @@ package com.codemovers.scholar.v1.backoffice.api.v1.abstracts;
  *
  * @author Mover
  */
-public abstract class AbstractService<T> {
+public abstract class AbstractService<T, Z> {
 
-    public abstract T create(T entity) throws Exception;
-    public abstract T getById(Integer Id) throws Exception;
+    public abstract Z create(T entity) throws Exception;
+
+    public abstract Z getById(Integer Id) throws Exception;
 
 }

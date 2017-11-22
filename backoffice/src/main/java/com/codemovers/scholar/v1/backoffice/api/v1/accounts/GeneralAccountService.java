@@ -27,7 +27,7 @@ import javax.ws.rs.BadRequestException;
  *
  * @author mover 11/18/2017
  */
-public class GeneralAccountService extends AbstractService<_Account> {
+public class GeneralAccountService extends AbstractService<_Account, AccountResponse> {
 
     private final GeneralAccountJpaController controller;
     private GeneralAccounts accounts = null;
@@ -44,8 +44,12 @@ public class GeneralAccountService extends AbstractService<_Account> {
         return service;
     }
 
+    public AccountResponse createAccount(_Account entity) throws Exception {
+
+        return null;
+    }
     @Override
-    public _Account create(_Account entity) throws Exception {
+    public AccountResponse create(_Account entity) throws Exception {
 
         try {
             //todo: person
@@ -106,14 +110,15 @@ public class GeneralAccountService extends AbstractService<_Account> {
         //    account.setUsersCollection(users_);
 
             //todo:: assign user roleF
-            return entity;
+          //  return entity;
+            return null;
         } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
-    public _Account getById(Integer Id) throws Exception {
+    public AccountResponse getById(Integer Id) throws Exception {
         GeneralAccounts account = controller.findAccount(Id);
 
         _Account a = new _Account();
@@ -121,7 +126,7 @@ public class GeneralAccountService extends AbstractService<_Account> {
         a.setExternalid(account.getExternalid());
         a.setAccounttype(AccountType.fromString(account.getAccountType()));
 
-        return a;
+        return null;
 
     }
 
