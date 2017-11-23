@@ -25,6 +25,7 @@ import com.codemovers.scholar.v1.backoffice.helper.enums.ContactTypes;
 import com.codemovers.scholar.v1.backoffice.helper.enums.ParentTypes;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import java.util.Date;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.BadRequestException;
 
@@ -173,6 +174,7 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
     public AuthenticationResponse login(_login login, String logId) throws Exception {
 
+        LOG.log(Level.INFO, " General Account Service Login ");
         String authentication = null;
 
         boolean status = login.validate();
@@ -186,17 +188,17 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
         {
             if (login.getPassword() != null && login.getUsername() != null) {
                 // todo : encrypt password
-                  Users users = UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
+                Users users = UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
 
-                if (users == null) {
-                    throw new BadRequestException("INVALID USERNAME AND OR PASSWORD ");
-                } else {
-                    // create response ::
-                    authentication = UserService.getInstance().convertToBasicAuth(login.getUsername(), login.getPassword());
-
-                    response.setAuthentication(authentication);
-                    // todo: generate response 
-                }
+//                if (users == null) {
+//                    throw new BadRequestException("INVALID USERNAME AND OR PASSWORD ");
+//                } else {
+//                    // create response ::
+//                    authentication = UserService.getInstance().convertToBasicAuth(login.getUsername(), login.getPassword());
+//
+//                    response.setAuthentication(authentication);
+//                    // todo: generate response
+//                }
                 //todo : check username and password
             } else {
                 throw new BadRequestException(" USERNAME AND OR PASSWORD IS MANDATORY  ");
@@ -204,7 +206,7 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
         }
 
-        return null;
+        return response;
         //todo: 
     }
 

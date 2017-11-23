@@ -117,17 +117,12 @@ public class UserService extends AbstractService<_User, UserResponse> {
     //todo: retrieve authentication 
     public Users login(String username, String password, String logid) throws Exception {
 
+        LOG.log(Level.INFO, " USERSERVICE Account Service Login {0} ", username);
+
         String authentication = null;
 
         String encryptedPassword = Utilities.encryptPassword_md5(password);
         Users user = controller.login(username, encryptedPassword);
-
-        if (user != null) {
-
-            LOG.log(Level.INFO, "USER RESPONSE {0} ", user.toString());
-
-            authentication = convertToBasicAuth(user.getUsername(), user.getPassword());
-        }
 
         return user;
 

@@ -115,9 +115,7 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account, AccountR
         String logId = context.getProperty("logId").toString();
         Utilities.logHttpServletRequest(httpRequest, logId);
         LOG.log(Level.INFO, "{0} :: start", new Object[]{logId});
-
-        service.login(login, logId);
-        return null;
+        return service.login(login, logId);
     }
 
 

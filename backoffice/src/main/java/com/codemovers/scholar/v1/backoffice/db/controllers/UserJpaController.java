@@ -70,7 +70,7 @@ public class UserJpaController extends JpaController {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = user.getId().intValue();
+                Integer id = user.getId();
                 if (findUser(id) == null) {
                     throw new BadRequestException("The mOffice with id " + id + " no longer exists.");
                 }
@@ -135,15 +135,24 @@ public class UserJpaController extends JpaController {
         return userList;
     }
 
-    public Users login(String username, String passowrd) {
+    public Users login(String username, String password) {
+
+        LOG.log(Level.INFO, " CONTROLLER   ");
 
         Users users = null;
         EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("Users.login");
-        query.setParameter("username", username);
-        query.setParameter("passowrd", passowrd);
+
+        LOG.log(Level.INFO, " CONTROLLER  PASSED  ");
+
         try {
-            users = (Users) query.getSingleResult();
+            Query query = em.createNamedQuery("Users.login");
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+
+
+            LOG.log(Level.INFO, " TEST 1234    ");
+
+            users = (Users) query.getResultList().get(0);
             LOG.log(Level.FINE, " User with username {0} found ", new Object[]{username});
 
         } catch (Exception ex) {
