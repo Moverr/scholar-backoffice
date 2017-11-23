@@ -66,6 +66,10 @@ public class GeneralAccounts implements Serializable {
 //    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    private Collection<Users> usersCollection;
 
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<SchoolAccount> schoolAccountCollection;
+
     public GeneralAccounts() {
     }
 
@@ -125,6 +129,14 @@ public class GeneralAccounts implements Serializable {
 //    public void setUsersCollection(Collection<Users> usersCollection) {
 //        this.usersCollection = usersCollection;
 //    }
+    public Collection<SchoolAccount> getSchoolAccountCollection() {
+        return schoolAccountCollection;
+    }
+
+    public void setSchoolAccountCollection(Collection<SchoolAccount> schoolAccountCollection) {
+        this.schoolAccountCollection = schoolAccountCollection;
+    }
+
 
     @Override
     public int hashCode() {
