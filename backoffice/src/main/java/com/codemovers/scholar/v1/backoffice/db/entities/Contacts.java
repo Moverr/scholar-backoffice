@@ -33,7 +33,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Contacts.findByParentId", query = "SELECT c FROM Contacts c WHERE c.parentId = :parentId")
     , @NamedQuery(name = "Contacts.findByContactType", query = "SELECT c FROM Contacts c WHERE c.contactType = :contactType")
     , @NamedQuery(name = "Contacts.findByDetails", query = "SELECT c FROM Contacts c WHERE c.details = :details")
-    , @NamedQuery(name = "Contacts.findByStatus", query = "SELECT c FROM Contacts c WHERE c.status = :status")})
+    , @NamedQuery(name = "Contacts.findByStatus", query = "SELECT c FROM Contacts c WHERE c.status = :status")
+    , @NamedQuery(name = "Contacts.findByParentTypeANDId", query = "SELECT c FROM Contacts c WHERE c.parentType = :parentType AND c.parentId = :parentId ")
+
+})
 public class Contacts implements Serializable {
 
     private static final long serialVersionUID = 1L;

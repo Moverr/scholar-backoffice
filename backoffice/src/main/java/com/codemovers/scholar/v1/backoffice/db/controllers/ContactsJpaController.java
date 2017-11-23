@@ -96,8 +96,8 @@ public class ContactsJpaController extends JpaController {
     public List<Contacts> findContact(String parentType) {
         List<Contacts> contactsList = new ArrayList<>();
         EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByName");
-        query.setParameter("name", parentType);
+        Query query = em.createNamedQuery("Contacts.findByParentType");
+        query.setParameter("parentType", parentType);
         try {
             contactsList = query.getResultList();
             LOG.log(Level.FINE, "offices found for username {0}", new Object[]{parentType});
@@ -116,8 +116,9 @@ public class ContactsJpaController extends JpaController {
     public List<Contacts> findContact(String parentType, Integer parentId) {
         List<Contacts> contactsList = new ArrayList<>();
         EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByName");
-        query.setParameter("name", parentType);
+        Query query = em.createNamedQuery("Contacts.findByParentTypeANDId");
+        query.setParameter("parentType", parentType);
+        query.setParameter("parentId", parentId);
         try {
             contactsList = query.getResultList();
             LOG.log(Level.FINE, "offices found for username {0}", new Object[]{parentType});
