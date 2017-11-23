@@ -50,6 +50,7 @@ public class ContactsService extends AbstractService<_contacts, ContactsResponse
         if (contactType.equals(ContactTypes.INVALID)) {
             throw new BadRequestException("Contact Type is Invalid");
         }
+
         contacts.setContactType(contactType.toString());
         contacts.setDetails(entity.getDetails());
         contacts.setStatus(StatusEnum.ACTIVE.toString());
@@ -57,15 +58,27 @@ public class ContactsService extends AbstractService<_contacts, ContactsResponse
         contacts.setParentId(entity.getParentId());
         contacts.setParentType(entity.getParentType());
 
-
-        controller.create(contacts);
-        return null;
+        contacts = controller.create(contacts);
+        return populateResponse(contacts);
 
     }
+
 
     @Override
     public ContactsResponse getById(Integer Id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public ContactsResponse populateResponse(Contacts contacts) {
+
+        ContactsResponse response = new ContactsResponse();
+        response.setId(contacts.getId());
+        response.setParentType(contacts.getParentType());
+        response.setParentId(contacts.getParentId());
+        response.setContactType(contacts.getContactType());
+        response.setDetails(contacts.getDetails());
+        response.setStatus(contacts.getStatus());
+
+        return response;
+    }
 }
