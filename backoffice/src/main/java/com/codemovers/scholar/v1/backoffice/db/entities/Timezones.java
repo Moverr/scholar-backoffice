@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Manny
+ * @author Mover 11/24/2017
  */
 @Entity
 @Table(name = "timezones")

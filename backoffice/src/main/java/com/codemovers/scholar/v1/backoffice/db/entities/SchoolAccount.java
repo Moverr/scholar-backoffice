@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Manny
+ * @author Mover 11/24/2017
  */
 @Entity
 @Table(name = "school_account")
