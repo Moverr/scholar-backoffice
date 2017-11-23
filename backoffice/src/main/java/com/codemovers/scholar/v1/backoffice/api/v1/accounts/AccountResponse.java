@@ -20,6 +20,7 @@ class AccountResponse {
     private String scholarid;
     private String authentication;
 
+
     public AccountResponse() {
     }
 

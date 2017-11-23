@@ -9,6 +9,9 @@ import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities.AuthenticationResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._Account;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities._login;
+import com.codemovers.scholar.v1.backoffice.api.v1.contacts.ContactsService;
+import com.codemovers.scholar.v1.backoffice.api.v1.contacts.entities.ContactsResponse;
+import com.codemovers.scholar.v1.backoffice.api.v1.contacts.entities._contacts;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities.UserResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
@@ -17,6 +20,7 @@ import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
+import com.codemovers.scholar.v1.backoffice.helper.enums.ContactTypes;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -72,8 +76,18 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
             //todo: create General AcFcount ::
             GeneralAccounts account = controller.create(accounts);
 
+            ContactsResponse contactsResponse = null;
             //todo: create the email contact for the account
             {
+                if (entity.getEmailaddress() != null) {
+                    //emailaddress
+                    _contacts contacts = new _contacts();
+                    contacts.setContactType(ContactTypes.EMAIL.toString());
+                    contacts.setDetails(entity.getEmailaddress());
+
+                    contactsResponse = ContactsService.getInstance().create(contacts);
+                }
+
 
             }
             //todo: create a user
@@ -119,7 +133,10 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
             AccountResponse response = new AccountResponse();
             response.setAccounttype(accounts.getAccountType());
             response.setUsername(entity.getUsername());
-            response.setEmailaddress(entity.getEmailaddress());
+            if (contactsResponse != null) {
+                response.setEmailaddress(contactsResponse.getDetails());
+            }
+
             response.setStatus(accounts.getStatus());
             response.setScholarid(accounts.getExternalid());
             response.setAuthentication(authentication);
