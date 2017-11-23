@@ -18,6 +18,7 @@ import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
+import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.ContactTypes;
@@ -172,17 +173,23 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
     public AuthenticationResponse login(_login login, String logId) throws Exception {
 
-        String Authentication = null;
+        String authentication = null;
+
+        AuthenticationResponse response = new AuthenticationResponse();
 
         {
             if (login.getPassword() != null && login.getUsername() != null) {
                 // todo : encrypt password
-                  Authentication = UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
+                  Users users = UserService.getInstance().login(login.getUsername(), login.getPassword(), logId);
 
-                if (Authentication == null) {
+                if (users == null) {
                     throw new BadRequestException("INVALID USERNAME AND OR PASSWORD ");
                 } else {
-                    // create response :: 
+                    // create response ::
+                    authentication = UserService.getInstance().convertToBasicAuth(login.getUsername(), login.getPassword());
+
+                    response.setAuthentication(authentication);
+                    // todo: generate response 
                 }
                 //todo : check username and password
             } else {

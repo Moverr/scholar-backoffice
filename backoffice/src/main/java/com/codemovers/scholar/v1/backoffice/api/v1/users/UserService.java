@@ -115,7 +115,7 @@ public class UserService extends AbstractService<_User, UserResponse> {
     }
 
     //todo: retrieve authentication 
-    public String login(String username, String password, String logid) throws Exception {
+    public Users login(String username, String password, String logid) throws Exception {
 
         String authentication = null;
 
@@ -129,7 +129,7 @@ public class UserService extends AbstractService<_User, UserResponse> {
             authentication = convertToBasicAuth(user.getUsername(), user.getPassword());
         }
 
-        return authentication;
+        return user;
 
     }
 

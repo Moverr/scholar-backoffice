@@ -20,19 +20,19 @@ import java.util.List;
  */
 public class AuthenticationResponse {
 
-    private String authorization;
+    private String authentication;
     private List<PermissionsResponse> permissions;
     private Boolean isLoggedIn;
 
     public AuthenticationResponse() {
     }
 
-    public String getAuthorization() {
-        return authorization;
+    public String getAuthentication() {
+        return authentication;
     }
 
-    public void setAuthorization(String authorization) {
-        this.authorization = authorization;
+    public void setAuthentication(String authentication) {
+        this.authentication = authentication;
     }
 
     public List<PermissionsResponse> getPermissions() {
@@ -56,7 +56,7 @@ public class AuthenticationResponse {
     public String toString() {
         return this.getClass().getCanonicalName()
                 + "{"
-                + "authorization=" + authorization
+                + "authorization=" + authentication
                 + ", permissions=" + permissions
                 + ", isLoggedIn=" + isLoggedIn
                 + "}";

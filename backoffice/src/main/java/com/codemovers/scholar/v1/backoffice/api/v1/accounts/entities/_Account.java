@@ -5,6 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.accounts.entities;
 
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -149,6 +150,15 @@ public class _Account {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validate() {
+        try {
+            Utilities.validateMandatoryFields(this.getClass(), this);
+        } catch (Exception e) {
             return false;
         }
         return true;
