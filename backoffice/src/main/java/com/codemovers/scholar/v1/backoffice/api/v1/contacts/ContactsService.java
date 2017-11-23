@@ -5,10 +5,67 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.contacts;
 
+import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
+import com.codemovers.scholar.v1.backoffice.api.v1.contacts.entities.ContactsResponse;
+import com.codemovers.scholar.v1.backoffice.api.v1.contacts.entities._contacts;
+import com.codemovers.scholar.v1.backoffice.db.controllers.ContactsJpaController;
+import com.codemovers.scholar.v1.backoffice.db.entities.Contacts;
+import com.codemovers.scholar.v1.backoffice.helper.enums.ContactTypes;
+import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
+import java.util.logging.Logger;
+import javax.ws.rs.BadRequestException;
+
 /**
  *
  * @author Mover 11/23/2017
  */
-public class ContactsService {
+public class ContactsService extends AbstractService<_contacts, ContactsResponse> {
+
+    private static final Logger LOG = Logger.getLogger(ContactsService.class.getName());
+    private final ContactsJpaController controller;
+    private static ContactsService service = null;
+
+    public ContactsService() {
+        controller = ContactsJpaController.getInstance();
+    }
+
+    public static ContactsService getInstance() {
+        if (service == null) {
+            service = new ContactsService();
+        }
+        return service;
+    }
+
+
+    @Override
+    public ContactsResponse create(_contacts entity) throws Exception {
+        boolean status = entity.validate();
+        if (status == false) {
+            throw new BadRequestException("Fill Mandatories");
+        }
+
+        Contacts contacts = new Contacts();
+
+        ContactTypes contactType = ContactTypes.fromString(entity.getContactType());
+        if (contactType.equals(ContactTypes.INVALID)) {
+            throw new BadRequestException("Contact Type is Invalid");
+        }
+        contacts.setContactType(contactType.toString());
+        contacts.setDetails(entity.getDetails());
+        contacts.setStatus(StatusEnum.ACTIVE.toString());
+
+        contacts.setParentId(entity.getParentId());
+        contacts.setParentType(entity.getParentType());
+
+
+        controller.create(contacts);
+        return null;
+
+    }
+
+    @Override
+    public ContactsResponse getById(Integer Id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

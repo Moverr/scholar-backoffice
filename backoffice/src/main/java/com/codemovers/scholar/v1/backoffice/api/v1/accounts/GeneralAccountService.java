@@ -15,13 +15,11 @@ import com.codemovers.scholar.v1.backoffice.api.v1.users.entities._User;
 import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.Person;
-import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.logging.Logger;
 import javax.ws.rs.BadRequestException;
 
 /**
@@ -29,6 +27,8 @@ import javax.ws.rs.BadRequestException;
  * @author mover 11/18/2017
  */
 public class GeneralAccountService extends AbstractService<_Account, AccountResponse> {
+
+    private static final Logger LOG = Logger.getLogger(GeneralAccountService.class.getName());
 
     private final GeneralAccountJpaController controller;
     private GeneralAccounts accounts = null;

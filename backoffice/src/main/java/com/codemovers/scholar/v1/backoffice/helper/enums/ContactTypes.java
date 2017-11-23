@@ -10,7 +10,7 @@ package com.codemovers.scholar.v1.backoffice.helper.enums;
  * @author Mover 6/4/2017
  */
 public enum ContactTypes {
-    PHONE, EMAIL, WEBSITE, FAX, WATSAPP, FACEBOOK, LINKEDIN, TWITTER, SNAPCHAT, PINTEREST, OTHERS;
+    PHONE, EMAIL, WEBSITE, FAX, WATSAPP, FACEBOOK, LINKEDIN, TWITTER, SNAPCHAT, PINTEREST, OTHERS, INVALID;
     //SOCIALMEDIA
 
     public static final ContactTypes fromString(String text) {
@@ -22,7 +22,7 @@ public enum ContactTypes {
             }
         } catch (IllegalArgumentException e) {
 
-            returnValue = OTHERS;
+            returnValue = INVALID;
         }
 
         return returnValue;

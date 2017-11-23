@@ -5,6 +5,8 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.contacts.entities;
 
+import com.codemovers.scholar.v1.backoffice.api.annotation.Mandatory;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
@@ -16,10 +18,14 @@ import java.util.Objects;
 public class _contacts {
 
     private Integer id;
-    private String parentType;
-    private Integer parentId;
-    private String contactType;
-    private String details;
+    private @Mandatory
+    String parentType;
+    private @Mandatory
+    Integer parentId;
+    private @Mandatory
+    String contactType;
+    private @Mandatory
+    String details;
     private String status;
 
     public _contacts() {
@@ -117,6 +123,15 @@ public class _contacts {
             return false;
         }
         return Objects.equals(this.parentId, other.parentId);
+    }
+
+    public boolean validate() {
+        try {
+            Utilities.validateMandatoryFields(this.getClass(), this);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
