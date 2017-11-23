@@ -151,9 +151,14 @@ public class UserJpaController extends JpaController {
 
 
             LOG.log(Level.INFO, " TEST 1234    ");
-
-            users = (Users) query.getResultList().get(0);
+            List<Users> list = query.getResultList();
             LOG.log(Level.FINE, " User with username {0} found ", new Object[]{username});
+            if (list != null) {
+                users = list.get(0);
+            } else {
+                throw new BadRequestException("USERNAME AND OR PASSWORD NOT VALID");
+            }
+
 
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});

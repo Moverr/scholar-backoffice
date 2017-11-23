@@ -182,6 +182,7 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
     public AuthenticationResponse login(_login login, String logId) throws Exception {
 
+        try {
         LOG.log(Level.INFO, " General Account Service Login ");
         String authentication = null;
 
@@ -222,6 +223,7 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
                             PermissionsResponse permissionsResponse = new PermissionsResponse();
                             permissionsResponse.setCode(p.getCode());
                             permissionsResponse.setName(p.getName());
+                            permissionsResponse.setId(p.getId().intValue());
                             permissionsResponses.add(permissionsResponse);
                         });
                     });
@@ -237,7 +239,10 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
         }
 
-        return response;
+            return response;
+        } catch (Exception er) {
+            throw new BadRequestException(" USERNAME AND OR PASSWORD IS MANDATORY  ");
+        }
         //todo: 
     }
 
