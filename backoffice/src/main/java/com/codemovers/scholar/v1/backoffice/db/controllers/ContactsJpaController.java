@@ -93,7 +93,7 @@ public class ContactsJpaController extends JpaController {
 
 
     // find contacts by parent types
-    public List<Contacts> findContact(String parentType) {
+    public List<Contacts> findContacts(String parentType) {
         List<Contacts> contactsList = new ArrayList<>();
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Contacts.findByParentType");
@@ -113,7 +113,7 @@ public class ContactsJpaController extends JpaController {
     }
 
     // find contacts by parent type and parent id
-    public List<Contacts> findContact(String parentType, Integer parentId) {
+    public List<Contacts> findContacts(String parentType, Integer parentId) {
         List<Contacts> contactsList = new ArrayList<>();
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Contacts.findByParentTypeANDId");
@@ -157,68 +157,14 @@ public class ContactsJpaController extends JpaController {
         return ContactsJpaController.this.findContactEntities(false, maxResults, firstResult);
     }
 
-    public GeneralAccounts findByExternalId(String externalId) {
-        GeneralAccounts generalAccount = new GeneralAccounts();
-        EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByExternalId");
-        query.setParameter("external_id", externalId);
-        try {
-            generalAccount = (GeneralAccounts) query.getSingleResult();
-            LOG.log(Level.FINE, "offices found for externalId {0}", new Object[]{externalId});
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
-            return null;
-            // don't throw WebApplicationException, force caller to handle this
-        } finally {
-            LOG.log(Level.FINER, "closing entity manager {0}", em);
-            em.close();
-        }
-        return generalAccount;
-    }
 
-    public List<GeneralAccounts> findByHeirarchy(String heirarchy) {
-        List<GeneralAccounts> generalAccountList = new ArrayList<>();
-        EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByHierarchy");
-        query.setParameter("hierarchy", heirarchy);
-        try {
-            generalAccountList = query.getResultList();
-            LOG.log(Level.FINE, "offices found for heirarchy {0}", new Object[]{heirarchy});
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
-            return null;
-            // don't throw WebApplicationException, force caller to handle this
-        } finally {
-            LOG.log(Level.FINER, "closing entity manager {0}", em);
-            em.close();
-        }
-        return generalAccountList;
-    }
 
-    public List<GeneralAccounts> findByParentId(String parentId) {
-        List<GeneralAccounts> generalAccountList = new ArrayList<>();
-        EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByParentId");
-        query.setParameter("parent_id", parentId);
-        try {
-            generalAccountList = query.getResultList();
-            LOG.log(Level.FINE, "offices found for parentId {0}", new Object[]{parentId});
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
-            return null;
-            // don't throw WebApplicationException, force caller to handle this
-        } finally {
-            LOG.log(Level.FINER, "closing entity manager {0}", em);
-            em.close();
-        }
-        return generalAccountList;
-    }
 
     public int getCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<GeneralAccounts> rt = cq.from(GeneralAccounts.class);
+            Root<Contacts> rt = cq.from(Contacts.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return (Integer) q.getSingleResult();
