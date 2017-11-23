@@ -82,13 +82,54 @@ public class ContactsJpaController extends JpaController {
         }
     }
 
-    public GeneralAccounts findContact(Integer id) {
+    public Contacts findContact(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(GeneralAccounts.class, id);
+            return em.find(Contacts.class, id);
         } finally {
             em.close();
         }
+    }
+
+
+    // find contacts by parent types
+    public List<Contacts> findContact(String parentType) {
+        List<Contacts> contactsList = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("MOffice.findByName");
+        query.setParameter("name", parentType);
+        try {
+            contactsList = query.getResultList();
+            LOG.log(Level.FINE, "offices found for username {0}", new Object[]{parentType});
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
+            return null;
+            // don't throw WebApplicationException, force caller to handle this
+        } finally {
+            LOG.log(Level.FINER, "closing entity manager {0}", em);
+            em.close();
+        }
+        return contactsList;
+    }
+
+    // find contacts by parent type and parent id
+    public List<Contacts> findContact(String parentType, Integer parentId) {
+        List<Contacts> contactsList = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("MOffice.findByName");
+        query.setParameter("name", parentType);
+        try {
+            contactsList = query.getResultList();
+            LOG.log(Level.FINE, "offices found for username {0}", new Object[]{parentType});
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
+            return null;
+            // don't throw WebApplicationException, force caller to handle this
+        } finally {
+            LOG.log(Level.FINER, "closing entity manager {0}", em);
+            em.close();
+        }
+        return contactsList;
     }
 
     private List<Contacts> findContactEntities(boolean all, int maxResults, int firstResult) {
@@ -114,47 +155,6 @@ public class ContactsJpaController extends JpaController {
     public List<Contacts> findContactEntities(int maxResults, int firstResult) {
         return ContactsJpaController.this.findContactEntities(false, maxResults, firstResult);
     }
-
-    // find contacts by parent types
-    public List<GeneralAccounts> findContact(String parentType) {
-        List<GeneralAccounts> generalAccountList = new ArrayList<>();
-        EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByName");
-        query.setParameter("name", parentType);
-        try {
-            generalAccountList = query.getResultList();
-            LOG.log(Level.FINE, "offices found for username {0}", new Object[]{parentType});
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
-            return null;
-            // don't throw WebApplicationException, force caller to handle this
-        } finally {
-            LOG.log(Level.FINER, "closing entity manager {0}", em);
-            em.close();
-        }
-        return generalAccountList;
-    }
-
-    // find contacts by parent type and parent id
-    public List<GeneralAccounts> findContact(String parentType, Integer parentId) {
-        List<GeneralAccounts> generalAccountList = new ArrayList<>();
-        EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("MOffice.findByName");
-        query.setParameter("name", parentType);
-        try {
-            generalAccountList = query.getResultList();
-            LOG.log(Level.FINE, "offices found for username {0}", new Object[]{parentType});
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
-            return null;
-            // don't throw WebApplicationException, force caller to handle this
-        } finally {
-            LOG.log(Level.FINER, "closing entity manager {0}", em);
-            em.close();
-        }
-        return generalAccountList;
-    }
-
 
     public GeneralAccounts findByExternalId(String externalId) {
         GeneralAccounts generalAccount = new GeneralAccounts();
