@@ -175,6 +175,12 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
         String authentication = null;
 
+        boolean status = login.validate();
+
+        if (status == false) {
+            throw new BadRequestException("FILL BLANKS ");
+        }
+
         AuthenticationResponse response = new AuthenticationResponse();
 
         {
