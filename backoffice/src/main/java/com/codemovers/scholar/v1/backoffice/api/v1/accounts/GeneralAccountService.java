@@ -71,6 +71,11 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
 
             //todo: create General AcFcount ::
             GeneralAccounts account = controller.create(accounts);
+
+            //todo: create the email contact for the account
+            {
+
+            }
             //todo: create a user
             _User user = new _User();
             user.setAccount_id(account.getId());
