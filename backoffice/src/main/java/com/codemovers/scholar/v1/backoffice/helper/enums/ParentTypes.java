@@ -10,7 +10,7 @@ package com.codemovers.scholar.v1.backoffice.helper.enums;
  * @author Mover 6/7/2017
  */
 public enum ParentTypes {
-    PERSON, COMPANY, PROPERTY, OTHERS;
+    PERSON, COMPANY, PROPERTY, OTHERS, GENERALACCOUNT;
 
     public static final ParentTypes fromString(String text) {
         ParentTypes returnValue = OTHERS;

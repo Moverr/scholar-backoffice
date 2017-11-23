@@ -21,6 +21,7 @@ import com.codemovers.scholar.v1.backoffice.db.entities.Person;
 import static com.codemovers.scholar.v1.backoffice.helper.Utilities.getNewExternalId;
 import com.codemovers.scholar.v1.backoffice.helper.enums.AccountType;
 import com.codemovers.scholar.v1.backoffice.helper.enums.ContactTypes;
+import com.codemovers.scholar.v1.backoffice.helper.enums.ParentTypes;
 import com.codemovers.scholar.v1.backoffice.helper.enums.StatusEnum;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -84,6 +85,8 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
                     _contacts contacts = new _contacts();
                     contacts.setContactType(ContactTypes.EMAIL.toString());
                     contacts.setDetails(entity.getEmailaddress());
+                    contacts.setParentType(ParentTypes.GENERALACCOUNT.toString());
+                    contacts.setParentId(account.getId());
 
                     contactsResponse = ContactsService.getInstance().create(contacts);
                 }
