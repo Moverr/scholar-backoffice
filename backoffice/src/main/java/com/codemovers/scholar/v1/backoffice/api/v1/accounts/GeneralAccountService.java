@@ -203,11 +203,8 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
                 } else {
                     // create response ::
                     authentication = UserService.getInstance().convertToBasicAuth(login.getUsername(), login.getPassword());
-
                     response.setAuthentication(authentication);
-
                     Set<Roles> roleslist = users.getRoles();
-
                     List<PermissionsResponse> permissionsResponses = new ArrayList<>();
 
 //                      for (Roles r : roleslist) {
@@ -225,12 +222,12 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
                             PermissionsResponse permissionsResponse = new PermissionsResponse();
                             permissionsResponse.setCode(p.getCode());
                             permissionsResponse.setName(p.getName());
-
                             permissionsResponses.add(permissionsResponse);
                         });
                     });
 
-                        response.setPermissions(permissionsResponses);
+                    response.setPermissions(permissionsResponses);
+                    response.setIsLoggedIn(true);
 
                 }
                 //todo : check username and password
