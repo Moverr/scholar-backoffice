@@ -9,7 +9,10 @@ import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountService;
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities.SchoolaAccountResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities._SchoolAccount;
+import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
+import com.codemovers.scholar.v1.backoffice.db.entities.Users;
 import java.util.logging.Logger;
+import javax.ws.rs.BadRequestException;
 
 /**
  *
@@ -31,11 +34,19 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
     }
 
     @Override
-    public SchoolaAccountResponse create(String Authentication, _SchoolAccount entity) throws Exception {
+    public SchoolaAccountResponse create(String authentication, _SchoolAccount entity) throws Exception {
 
         //todo: verify login:
-        //todo: create school account 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean status = UserService.getInstance().validateAuthentication(authentication);
+
+        if (status == false) {
+            throw new BadRequestException("INVALID AUTHENTICATION CREDENTIALS ");
+        }
+        //todo: create school account
+
+        throw new UnsupportedOperationException("Not supported yet.");
+        //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override

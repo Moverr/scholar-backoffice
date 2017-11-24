@@ -46,8 +46,7 @@ public class SchoolAccountsEndpoint extends AbstractEndpoint<_SchoolAccount, Sch
         try {
             return service.create(authentication, entity);
         } catch (Exception ex) {
-            Logger.getLogger(SchoolAccountsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
-
+            LOG.log(Level.SEVERE, "CAN NOT CREATE SCHOOL ACCOUNT SUCCESFULLY ");
             throw ex;
         }
 
