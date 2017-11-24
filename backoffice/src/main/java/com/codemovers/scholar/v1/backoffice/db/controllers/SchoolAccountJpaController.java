@@ -7,7 +7,6 @@ package com.codemovers.scholar.v1.backoffice.db.controllers;
 
 import com.codemovers.scholar.v1.backoffice.db.JpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.SchoolAccount;
-import com.codemovers.scholar.v1.backoffice.db.entities.UserRole;
 import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class SchoolAccountJpaController extends JpaController {
             em.persist(entity);
             em.getTransaction().commit();
         } catch (Exception eml) {
-            LOG.log(Level.INFO, "ERROR USEROLE {0} ", Utilities.getStackTrace(eml));
+            LOG.log(Level.INFO, "ERROR SCHOOL ACCOUNT {0} ", Utilities.getStackTrace(eml));
             throw eml;
         } finally {
             if (em != null) {
@@ -55,7 +54,6 @@ public class SchoolAccountJpaController extends JpaController {
             }
         }
         return entity;
-
     }
 
     public void edit(SchoolAccount school_account) throws Exception {
