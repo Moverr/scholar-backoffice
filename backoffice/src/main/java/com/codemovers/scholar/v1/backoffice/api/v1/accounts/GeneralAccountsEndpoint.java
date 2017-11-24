@@ -35,7 +35,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("/")
 public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account, AccountResponse> {
-    private static final Logger LOG = Logger.getLogger(AbstractEndpoint.class.getName());
+    private static final Logger LOG = Logger.getLogger(GeneralAccountsEndpoint.class.getName());
 
     @Context
     private ContainerRequestContext context;

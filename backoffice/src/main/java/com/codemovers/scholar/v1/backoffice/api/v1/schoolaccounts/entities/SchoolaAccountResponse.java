@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author Mover 11/24/2017
  */
-public class ScholaAccountResponse {
+public class SchoolaAccountResponse {
 
     private Integer id;
     private Integer account_id;
@@ -23,7 +23,7 @@ public class ScholaAccountResponse {
     private Date last_modified;
     private String external_id;
 
-    public ScholaAccountResponse() {
+    public SchoolaAccountResponse() {
     }
 
     public Integer getId() {
@@ -115,7 +115,7 @@ public class ScholaAccountResponse {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ScholaAccountResponse other = (ScholaAccountResponse) obj;
+        final SchoolaAccountResponse other = (SchoolaAccountResponse) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
