@@ -11,8 +11,23 @@ package com.codemovers.scholar.v1.backoffice.api.v1.abstracts;
  */
 public abstract class AbstractService<T, Z> {
 
-    public abstract Z create(T entity) throws Exception;
+    public Z create(T entity) throws Exception {
+        throw new UnsupportedOperationException("Not Supported ");
 
-    public abstract Z getById(Integer Id) throws Exception;
+    }
+
+    public Z create(String authentication, T entity) throws Exception {
+        throw new UnsupportedOperationException("Not Supported ");
+    }
+
+
+    public Z getById(Integer Id) throws Exception {
+        throw new UnsupportedOperationException("Not Supported ");
+    }
+
+    public Z getById(String authentication, Integer Id) throws Exception {
+        throw new UnsupportedOperationException("Not Supported ");
+    }
+
 
 }

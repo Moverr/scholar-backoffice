@@ -31,12 +31,12 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
     }
 
     @Override
-    public SchoolaAccountResponse create(_SchoolAccount entity) throws Exception {
+    public SchoolaAccountResponse create(String Authentication, _SchoolAccount entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public SchoolaAccountResponse getById(Integer Id) throws Exception {
+    public SchoolaAccountResponse getById(String Authentication, Integer Id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

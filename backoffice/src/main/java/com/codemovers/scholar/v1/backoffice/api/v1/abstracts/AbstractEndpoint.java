@@ -6,6 +6,7 @@
 package com.codemovers.scholar.v1.backoffice.api.v1.abstracts;
 
 import java.util.Collection;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
@@ -16,7 +17,14 @@ import javax.ws.rs.core.Response;
  */
 public abstract class AbstractEndpoint<T, Z> {
 
-    public abstract Z create(T entity);
+    public Z create(T entity) {
+        throw new UnsupportedOperationException("Not Supported ");
+    }
+
+    public Z create(@HeaderParam("authentication") String authentication, T entity) {
+        throw new UnsupportedOperationException("Not Supported ");
+    }
+
 
     /**
      *

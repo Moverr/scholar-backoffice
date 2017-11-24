@@ -60,10 +60,6 @@ public class GeneralAccountService extends AbstractService<_Account, AccountResp
         return service;
     }
 
-    public AccountResponse createAccount(_Account entity) throws Exception {
-
-        return null;
-    }
     @Override
     public AccountResponse create(_Account entity) throws Exception {
 

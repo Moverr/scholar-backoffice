@@ -19,6 +19,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -40,21 +41,22 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account, AccountR
     @Context
     private ContainerRequestContext context;
 
-    GeneralAccountService service;
+    private GeneralAccountService service = null;
 
     public GeneralAccountsEndpoint() {
-        service = new GeneralAccountService();
+        service = GeneralAccountService.getInstance();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
-    public AccountResponse create(_Account entity) {
+    public AccountResponse create(
+            @HeaderParam("authentication") String authentcation, _Account entity
+    ) {
 
         try {
             LOG.log(Level.INFO, "Create General Account Endpoint ");
-
             return service.create(entity);
 
         } catch (Exception ex) {
@@ -118,5 +120,9 @@ public class GeneralAccountsEndpoint extends AbstractEndpoint<_Account, AccountR
         return service.login(login, logId);
     }
 
+    @Override
+    public AccountResponse create(_Account entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
