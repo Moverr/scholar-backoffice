@@ -7,7 +7,7 @@ package com.codemovers.scholar.v1.backoffice.api.v1.abstracts;
 
 /**
  *
- * @author Mover
+ * @author Mover 11/24/2017
  */
 public abstract class AbstractService<T, Z> {
 

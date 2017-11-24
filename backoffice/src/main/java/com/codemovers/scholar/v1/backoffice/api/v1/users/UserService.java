@@ -22,6 +22,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import org.sonatype.plexus.components.cipher.Base64;
 
 /**
@@ -140,6 +142,30 @@ public class UserService extends AbstractService<_User, UserResponse> {
         return ("Basic:" + authStringEnc);
         //  String possibleAuthenticationKey = "Basic " + Base64.getEncoder().encodeToString(usernamePassowrd.trim().getBytes());
 
+    }
+
+    //todo: validate authenticaton
+    public boolean validateAuthentication(String authentication) throws Exception {
+        Users user = null;
+        authentication = authentication.replace("Basic", "");
+        String usernamePassword = new String(java.util.Base64.getDecoder().decode(authentication));
+        String[] parts = usernamePassword.split(":");
+
+        if (parts.length != 2) {
+            LOG.log(Level.WARNING, "{0} :: invalid security credentials");
+            throw new WebApplicationException("invalid security credentials", Response.Status.UNAUTHORIZED);
+        }
+
+        String username = parts[0];
+        String password = parts[1];
+        user = login(username, password, "LOGID");
+
+        if (user == null) {
+            throw new BadRequestException(" invalid security credentials ", Response.Status.UNAUTHORIZED.toString());
+
+        }
+
+        return true;
     }
 
 }

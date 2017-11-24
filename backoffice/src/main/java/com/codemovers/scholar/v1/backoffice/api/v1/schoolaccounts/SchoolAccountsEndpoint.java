@@ -9,8 +9,10 @@ import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities.SchoolaAccountResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities._SchoolAccount;
 import java.util.Collection;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -39,8 +41,16 @@ public class SchoolAccountsEndpoint extends AbstractEndpoint<_SchoolAccount, Sch
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
-    public SchoolaAccountResponse create(_SchoolAccount entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SchoolaAccountResponse create(@HeaderParam("authentication") String authentication, _SchoolAccount entity) throws Exception {
+
+        try {
+            return service.create(authentication, entity);
+        } catch (Exception ex) {
+            Logger.getLogger(SchoolAccountsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+
+            throw ex;
+        }
+
     }
 
     @Override

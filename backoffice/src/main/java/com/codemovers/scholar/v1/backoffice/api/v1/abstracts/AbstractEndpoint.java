@@ -21,7 +21,7 @@ public abstract class AbstractEndpoint<T, Z> {
         throw new UnsupportedOperationException("Not Supported ");
     }
 
-    public Z create(@HeaderParam("authentication") String authentication, T entity) {
+    public Z create(@HeaderParam("authentication") String authentication, T entity) throws Exception {
         throw new UnsupportedOperationException("Not Supported ");
     }
 

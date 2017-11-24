@@ -32,6 +32,9 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
 
     @Override
     public SchoolaAccountResponse create(String Authentication, _SchoolAccount entity) throws Exception {
+
+        //todo: verify login:
+        //todo: create school account 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
