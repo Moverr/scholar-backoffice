@@ -5,35 +5,25 @@
  */
 package com.codemovers.scholar.v1.backoffice.api.v1.serverconnections.entities;
 
-import com.codemovers.scholar.v1.backoffice.api.annotation.Mandatory;
-import com.codemovers.scholar.v1.backoffice.helper.Utilities;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
 /**
  *
  * @author Mover 11/26/2017
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class _SchoolServerConnection {
-
+public class SchoolServerConnectionResponse {
     private Integer id;
-    private @Mandatory
-    Integer school_account_id;
-    private @Mandatory
-    String schema_server;
-    private @Mandatory
-    String schema_name;
-    private @Mandatory
-    String schema_username;
-    private @Mandatory
-    String schema_password;
+    private Integer school_account_id;
+    private String schema_server;
+    private String schema_name;
+    private String schema_username;
+    private String schema_password;
     private Integer parent_db;
 
-    public _SchoolServerConnection() {
+    public SchoolServerConnectionResponse() {
     }
 
-    public _SchoolServerConnection(Integer id) {
+    public SchoolServerConnectionResponse(Integer id) {
         this.id = id;
     }
 
@@ -95,14 +85,14 @@ public class _SchoolServerConnection {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.school_account_id);
-        hash = 41 * hash + Objects.hashCode(this.schema_server);
-        hash = 41 * hash + Objects.hashCode(this.schema_name);
-        hash = 41 * hash + Objects.hashCode(this.schema_username);
-        hash = 41 * hash + Objects.hashCode(this.schema_password);
-        hash = 41 * hash + Objects.hashCode(this.parent_db);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.school_account_id);
+        hash = 29 * hash + Objects.hashCode(this.schema_server);
+        hash = 29 * hash + Objects.hashCode(this.schema_name);
+        hash = 29 * hash + Objects.hashCode(this.schema_username);
+        hash = 29 * hash + Objects.hashCode(this.schema_password);
+        hash = 29 * hash + Objects.hashCode(this.parent_db);
         return hash;
     }
 
@@ -117,7 +107,7 @@ public class _SchoolServerConnection {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _SchoolServerConnection other = (_SchoolServerConnection) obj;
+        final SchoolServerConnectionResponse other = (SchoolServerConnectionResponse) obj;
         if (!Objects.equals(this.schema_server, other.schema_server)) {
             return false;
         }
@@ -139,26 +129,10 @@ public class _SchoolServerConnection {
         return Objects.equals(this.parent_db, other.parent_db);
     }
 
-    public boolean validate() {
-        try {
-            Utilities.validateMandatoryFields(this.getClass(), this);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public String toString() {
-        return "_SchoolServerConnection{"
-                + "id=" + id
-                + ", school_account_id=" + school_account_id
-                + ", schema_server=" + schema_server
-                + ", schema_name=" + schema_name
-                + ", schema_username=" + schema_username
-                + ", schema_password=" + schema_password
-                + ", parent_db=" + parent_db
-                + "}";
+        return "SchoolServerConnectionResponse{" + "id=" + id + ", school_account_id=" + school_account_id + ", schema_server=" + schema_server + ", schema_name=" + schema_name + ", schema_username=" + schema_username + ", schema_password=" + schema_password + ", parent_db=" + parent_db + '}';
     }
+
 
 }
