@@ -67,7 +67,7 @@ public class GeneralAccounts implements Serializable {
 //    private Collection<Users> usersCollection;
 
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "accountId")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "general_account")
     private Collection<SchoolAccount> schoolAccountCollection;
 
     public GeneralAccounts() {

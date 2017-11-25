@@ -84,7 +84,8 @@ public class SchoolAccount implements Serializable {
     private String externalId;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private GeneralAccounts accountId;
+    private GeneralAccounts general_account;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "schoolAccount")
     private Collection<SchoolServerConnection> schoolServerConnectionCollection;
 
@@ -161,12 +162,12 @@ public class SchoolAccount implements Serializable {
         this.externalId = externalId;
     }
 
-    public GeneralAccounts getAccountId() {
-        return accountId;
+    public GeneralAccounts getGeneral_account() {
+        return general_account;
     }
 
-    public void setAccountId(GeneralAccounts accountId) {
-        this.accountId = accountId;
+    public void setGeneral_account(GeneralAccounts general_account) {
+        this.general_account = general_account;
     }
 
     public Collection<SchoolServerConnection> getSchoolServerConnectionCollection() {

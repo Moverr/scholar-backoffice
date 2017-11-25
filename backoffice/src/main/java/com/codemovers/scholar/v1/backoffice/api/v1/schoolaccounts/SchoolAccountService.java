@@ -10,7 +10,12 @@ import com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountServic
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities.SchoolaAccountResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities._SchoolAccount;
 import com.codemovers.scholar.v1.backoffice.api.v1.users.UserService;
+import com.codemovers.scholar.v1.backoffice.db.controllers.GeneralAccountJpaController;
+import com.codemovers.scholar.v1.backoffice.db.controllers.SchoolAccountJpaController;
+import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
+import com.codemovers.scholar.v1.backoffice.db.entities.SchoolAccount;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
+import java.util.Date;
 import java.util.logging.Logger;
 import javax.ws.rs.BadRequestException;
 
@@ -23,7 +28,11 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
 
     private static SchoolAccountService service = null;
 
+    GeneralAccounts general_account = null;
+    private final SchoolAccountJpaController controller;
+
     public SchoolAccountService() {
+        controller = new SchoolAccountJpaController();
     }
 
     public static SchoolAccountService getInstance() {
@@ -43,6 +52,22 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
             throw new BadRequestException("INVALID AUTHENTICATION CREDENTIALS ");
         }
         //todo: create school account
+
+        // get the General Account associated with the school
+       general_account = GeneralAccountService.getInstance().getGneralAccountById(entity.getAccount_id());
+
+        if (general_account == null) {
+            throw new BadRequestException(" GENERAL ACCOUNT DOES NOT EXIST ");
+        }
+
+        SchoolAccount schoolAccount = new SchoolAccount();
+        schoolAccount.setCreatedDate(new Date());
+        schoolAccount.setGeneral_account(general_account);
+        schoolAccount.setTimezoneCode(entity.getTime_zone());
+        schoolAccount.setJoinDate(entity.getJoin_date());
+
+        schoolAccount = controller.create(schoolAccount);
+
 
         throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.

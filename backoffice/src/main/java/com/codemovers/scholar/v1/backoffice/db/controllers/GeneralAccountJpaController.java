@@ -102,6 +102,11 @@ public class GeneralAccountJpaController extends JpaController {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage(), Utilities.getStackTrace(ex)});
+            em.close();
+            return null;
+            // don't throw WebApplicationException, force caller to handle this
         } finally {
             em.close();
         }
