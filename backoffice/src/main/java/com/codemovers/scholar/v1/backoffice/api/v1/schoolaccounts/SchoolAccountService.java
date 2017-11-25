@@ -74,7 +74,8 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
 
     @Override
     public SchoolaAccountResponse getById(String Authentication, Integer Id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SchoolAccount schoolAccount = controller.findById(Id);
+        return populateResponse(schoolAccount);
     }
 
     public SchoolaAccountResponse populateResponse(SchoolAccount schoolAccount) {
