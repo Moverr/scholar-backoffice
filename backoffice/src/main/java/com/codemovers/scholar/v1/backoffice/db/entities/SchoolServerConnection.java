@@ -38,7 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SchoolServerConnection.findBySchemaServer", query = "SELECT s FROM SchoolServerConnection s WHERE s.schemaServer = :schemaServer")
     , @NamedQuery(name = "SchoolServerConnection.findBySchemaName", query = "SELECT s FROM SchoolServerConnection s WHERE s.schemaName = :schemaName")
     , @NamedQuery(name = "SchoolServerConnection.findBySchemaUsername", query = "SELECT s FROM SchoolServerConnection s WHERE s.schemaUsername = :schemaUsername")
-    , @NamedQuery(name = "SchoolServerConnection.findBySchemaPassword", query = "SELECT s FROM SchoolServerConnection s WHERE s.schemaPassword = :schemaPassword")})
+    , @NamedQuery(name = "SchoolServerConnection.findBySchemaPassword", query = "SELECT s FROM SchoolServerConnection s WHERE s.schemaPassword = :schemaPassword")
+    , @NamedQuery(name = "SchoolServerConnection.findByAccountid", query = "SELECT s FROM SchoolServerConnection s WHERE s.schoolAccount.id = :schoolAccountId")
+
+})
 public class SchoolServerConnection implements Serializable {
 
     private static final long serialVersionUID = 1L;
