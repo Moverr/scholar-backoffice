@@ -74,6 +74,10 @@ public class Application {
                 getServlet(com.codemovers.scholar.v1.backoffice.api.v1.accounts.GeneralAccountsEndpoint.class
                 ), "/account/v1/*");
 
+        context.addServlet(
+                getServlet(com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.SchoolAccountsEndpoint.class
+                ), "/schoolaccount/v1/*");
+
         int port = 600;
         jettyServer = new Server(port);
 

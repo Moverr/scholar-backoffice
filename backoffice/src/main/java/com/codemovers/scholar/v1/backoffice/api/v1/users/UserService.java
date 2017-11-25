@@ -146,24 +146,33 @@ public class UserService extends AbstractService<_User, UserResponse> {
 
     //todo: validate authenticaton
     public boolean validateAuthentication(String authentication) throws Exception {
-        Users user = null;
-        authentication = authentication.replace("Basic", "");
-        String usernamePassword = new String(java.util.Base64.getDecoder().decode(authentication));
-        String[] parts = usernamePassword.split(":");
+        try {
+            Users user = null;
+            authentication = authentication.replace("Basic:", "");
 
-        if (parts.length != 2) {
-            LOG.log(Level.WARNING, "{0} :: invalid security credentials");
-            throw new WebApplicationException("invalid security credentials", Response.Status.UNAUTHORIZED);
-        }
+            LOG.log(Level.INFO, "AUTHENTICATION {0}  ", authentication);
 
-        String username = parts[0];
-        String password = parts[1];
-        user = login(username, password, "LOGID");
+            String usernamePassword = new String(java.util.Base64.getDecoder().decode(authentication));
+            String[] parts = usernamePassword.split(":");
+
+            if (parts.length != 2) {
+                LOG.log(Level.WARNING, "{0} :: invalid security credentials");
+                throw new WebApplicationException("invalid security credentials", Response.Status.UNAUTHORIZED);
+            }
+
+            String username = parts[0];
+            String password = parts[1];
+            user = login(username, password, "LOGID");
 
         if (user == null) {
             throw new BadRequestException(" invalid security credentials ", Response.Status.UNAUTHORIZED.toString());
 
+            }
+        } catch (Exception er) {
+            LOG.log(Level.WARNING, " VALIDATE TOKEN  ERROR  {0} ", er.toString());
+            throw er;
         }
+
 
         return true;
     }

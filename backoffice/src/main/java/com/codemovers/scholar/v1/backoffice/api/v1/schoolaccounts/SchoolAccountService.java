@@ -15,6 +15,7 @@ import com.codemovers.scholar.v1.backoffice.db.controllers.SchoolAccountJpaContr
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import com.codemovers.scholar.v1.backoffice.db.entities.SchoolAccount;
 import com.codemovers.scholar.v1.backoffice.db.entities.Users;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import java.util.Date;
 import java.util.logging.Logger;
 import javax.ws.rs.BadRequestException;
@@ -52,6 +53,11 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
             throw new BadRequestException("INVALID AUTHENTICATION CREDENTIALS ");
         }
         //todo: create school account
+       boolean validation_status = entity.validate();
+
+        if (validation_status == false) {
+            throw new BadRequestException("VALIDATE MANDATORIES ");
+        }
 
         // get the General Account associated with the school
        general_account = GeneralAccountService.getInstance().getGneralAccountById(entity.getAccount_id());
@@ -65,6 +71,9 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
         schoolAccount.setGeneral_account(general_account);
         schoolAccount.setTimezoneCode(entity.getTime_zone());
         schoolAccount.setJoinDate(entity.getJoin_date());
+        schoolAccount.setExternalId(Utilities.getNewExternalId());
+        schoolAccount.setName(entity.getName());
+
         schoolAccount = controller.create(schoolAccount);
 
         return populateResponse(schoolAccount);

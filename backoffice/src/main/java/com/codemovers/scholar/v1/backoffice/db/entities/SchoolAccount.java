@@ -72,11 +72,12 @@ public class SchoolAccount implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Basic(optional = false)
-    @NotNull
+
+    @Basic(optional = true)
     @Column(name = "last_modified")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
