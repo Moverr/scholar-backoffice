@@ -6,7 +6,6 @@
 package com.codemovers.scholar.v1.backoffice.db.controllers;
 
 import com.codemovers.scholar.v1.backoffice.db.JpaController;
-import com.codemovers.scholar.v1.backoffice.db.entities.SchoolAccount;
 import com.codemovers.scholar.v1.backoffice.db.entities.SchoolServerConnection;
 import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import java.util.ArrayList;
