@@ -51,7 +51,7 @@ public class SchoolAccount implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -92,11 +92,11 @@ public class SchoolAccount implements Serializable {
     public SchoolAccount() {
     }
 
-    public SchoolAccount(Long id) {
+    public SchoolAccount(Integer id) {
         this.id = id;
     }
 
-    public SchoolAccount(Long id, String name, String timezoneCode, Date joinDate, Date createdDate, Date lastModified, String externalId) {
+    public SchoolAccount(Integer id, String name, String timezoneCode, Date joinDate, Date createdDate, Date lastModified, String externalId) {
         this.id = id;
         this.name = name;
         this.timezoneCode = timezoneCode;
@@ -106,11 +106,11 @@ public class SchoolAccount implements Serializable {
         this.externalId = externalId;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

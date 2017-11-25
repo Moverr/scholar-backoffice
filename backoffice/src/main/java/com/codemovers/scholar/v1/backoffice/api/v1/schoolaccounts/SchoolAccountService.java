@@ -65,12 +65,10 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
         schoolAccount.setGeneral_account(general_account);
         schoolAccount.setTimezoneCode(entity.getTime_zone());
         schoolAccount.setJoinDate(entity.getJoin_date());
-
         schoolAccount = controller.create(schoolAccount);
 
+        return populateResponse(schoolAccount);
 
-        throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
 
     }
 
@@ -79,5 +77,28 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public SchoolaAccountResponse populateResponse(SchoolAccount schoolAccount) {
+
+        if (schoolAccount == null) {
+            return null;
+        }
+
+        SchoolaAccountResponse accountResponse = new SchoolaAccountResponse();
+
+        if (schoolAccount.getGeneral_account() != null) {
+            accountResponse.setAccount_id(schoolAccount.getGeneral_account().getId());
+        }
+
+        accountResponse.setCreated_date(schoolAccount.getCreatedDate());
+        accountResponse.setJoin_date(schoolAccount.getJoinDate());
+        accountResponse.setExternal_id(schoolAccount.getExternalId());
+        accountResponse.setName(schoolAccount.getName());
+        accountResponse.setTimezone_code(schoolAccount.getTimezoneCode());
+
+        accountResponse.setLast_modified(schoolAccount.getLastModified());
+        accountResponse.setId(schoolAccount.getId());
+
+        return accountResponse;
+    }
 
 }
