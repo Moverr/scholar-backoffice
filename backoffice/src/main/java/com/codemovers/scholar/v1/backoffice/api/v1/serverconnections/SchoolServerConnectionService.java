@@ -6,10 +6,8 @@
 package com.codemovers.scholar.v1.backoffice.api.v1.serverconnections;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
-import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.SchoolAccountService;
 import com.codemovers.scholar.v1.backoffice.api.v1.serverconnections.entities.SchoolServerConnectionResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.serverconnections.entities._SchoolServerConnection;
-import com.codemovers.scholar.v1.backoffice.db.controllers.SchoolAccountJpaController;
 import com.codemovers.scholar.v1.backoffice.db.controllers.SchoolServerConnectionJpaController;
 import com.codemovers.scholar.v1.backoffice.db.entities.GeneralAccounts;
 import java.util.logging.Logger;
@@ -37,5 +35,18 @@ public class SchoolServerConnectionService extends AbstractService<_SchoolServer
         }
         return service;
     }
+
+    @Override
+    public SchoolServerConnectionResponse create(String authentication, _SchoolServerConnection entity) throws Exception {
+
+        //
+        return null;
+    }
+
+    @Override
+    public SchoolServerConnectionResponse getById(String authentication, Integer Id) throws Exception {
+        return super.getById(authentication, Id); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }
