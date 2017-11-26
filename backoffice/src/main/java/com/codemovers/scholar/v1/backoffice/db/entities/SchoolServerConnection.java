@@ -70,6 +70,13 @@ public class SchoolServerConnection implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "schema_password")
     private String schemaPassword;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "engine_url")
+    private String engineurl;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentDb")
     private Collection<SchoolServerConnection> schoolServerConnectionCollection;
     @JoinColumn(name = "parent_db", referencedColumnName = "id")
@@ -133,6 +140,15 @@ public class SchoolServerConnection implements Serializable {
     public void setSchemaPassword(String schemaPassword) {
         this.schemaPassword = schemaPassword;
     }
+
+    public String getEngineurl() {
+        return engineurl;
+    }
+
+    public void setEngineurl(String engineurl) {
+        this.engineurl = engineurl;
+    }
+
 
     @XmlTransient
     public Collection<SchoolServerConnection> getSchoolServerConnectionCollection() {
