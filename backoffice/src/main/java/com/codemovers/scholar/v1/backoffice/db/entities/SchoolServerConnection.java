@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -77,11 +78,13 @@ public class SchoolServerConnection implements Serializable {
     @Column(name = "engine_url")
     private String engineurl;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentDb")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "parentDb")
     private Collection<SchoolServerConnection> schoolServerConnectionCollection;
+
     @JoinColumn(name = "parent_db", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
     private SchoolServerConnection parentDb;
+
     @JoinColumn(name = "school_account", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SchoolAccount schoolAccount;

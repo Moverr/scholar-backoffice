@@ -6,11 +6,6 @@
 package com.codemovers.scholar.v1.backoffice.api.v1.serverconnections;
 
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
-import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
-import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.SchoolAccountService;
-import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.SchoolAccountsEndpoint;
-import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities.SchoolaAccountResponse;
-import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities._SchoolAccount;
 import com.codemovers.scholar.v1.backoffice.api.v1.serverconnections.entities.SchoolServerConnectionResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.serverconnections.entities._SchoolServerConnection;
 import java.util.Collection;
@@ -19,6 +14,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
@@ -29,9 +25,10 @@ import javax.ws.rs.core.Response;
  *
  * @author Mover 11/26/2017
  */
+@Path("/")
 public class SchoolServerConnectionEndpoint extends AbstractEndpoint<_SchoolServerConnection, SchoolServerConnectionResponse> {
 
-    private static final Logger LOG = Logger.getLogger(SchoolAccountsEndpoint.class.getName());
+    private static final Logger LOG = Logger.getLogger(SchoolServerConnectionEndpoint.class.getName());
     @Context
     private ContainerRequestContext context;
 

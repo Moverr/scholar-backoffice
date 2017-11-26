@@ -22,8 +22,17 @@ public class _SchoolServerConnection {
     Integer school_account_id;
     private @Mandatory
     String schema_server;
-    private @Mandatory
-    String schema_name;
+
+    /*
+    the shema name, is created by using the external id of the school_account:
+    it means, u create a db using external_id in case of another db :
+    concatenate with version :
+
+    //todo ::
+     you can not create the same  db on the same server  but you can create on different servers  wheere there is a parent id ::
+    
+     */
+    private    String schema_name;
     private @Mandatory
     String schema_username;
     private @Mandatory
