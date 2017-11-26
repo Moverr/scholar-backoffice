@@ -49,7 +49,7 @@ public class SchoolServerConnection implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -89,11 +89,11 @@ public class SchoolServerConnection implements Serializable {
     public SchoolServerConnection() {
     }
 
-    public SchoolServerConnection(Long id) {
+    public SchoolServerConnection(Integer id) {
         this.id = id;
     }
 
-    public SchoolServerConnection(Long id, String schemaServer, String schemaName, String schemaUsername, String schemaPassword) {
+    public SchoolServerConnection(Integer id, String schemaServer, String schemaName, String schemaUsername, String schemaPassword) {
         this.id = id;
         this.schemaServer = schemaServer;
         this.schemaName = schemaName;
@@ -101,11 +101,11 @@ public class SchoolServerConnection implements Serializable {
         this.schemaPassword = schemaPassword;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

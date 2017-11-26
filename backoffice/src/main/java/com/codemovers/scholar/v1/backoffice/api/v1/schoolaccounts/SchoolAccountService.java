@@ -82,10 +82,30 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
     }
 
     @Override
-    public SchoolaAccountResponse getById(String Authentication, Integer Id) throws Exception {
+    public SchoolaAccountResponse getById(String authentication, Integer Id) throws Exception {
+        boolean status = UserService.getInstance().validateAuthentication(authentication);
+
+        if (status == false) {
+            throw new BadRequestException("INVALID AUTHENTICATION CREDENTIALS ");
+        }
+
         SchoolAccount schoolAccount = controller.findById(Id);
         return populateResponse(schoolAccount);
     }
+
+    public SchoolAccount getAccountbyId(String authentication, Integer Id) throws Exception {
+
+        boolean status = UserService.getInstance().validateAuthentication(authentication);
+
+        if (status == false) {
+            throw new BadRequestException("INVALID AUTHENTICATION CREDENTIALS ");
+        }
+
+        SchoolAccount schoolAccount = controller.findById(Id);
+
+        return schoolAccount;
+    }
+
 
     public SchoolaAccountResponse populateResponse(SchoolAccount schoolAccount) {
 
