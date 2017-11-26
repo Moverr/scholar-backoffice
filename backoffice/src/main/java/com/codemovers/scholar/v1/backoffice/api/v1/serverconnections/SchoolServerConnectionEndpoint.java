@@ -9,12 +9,20 @@ import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractEndpoint;
 import com.codemovers.scholar.v1.backoffice.api.v1.abstracts.AbstractService;
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.SchoolAccountService;
 import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.SchoolAccountsEndpoint;
+import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities.SchoolaAccountResponse;
+import com.codemovers.scholar.v1.backoffice.api.v1.schoolaccounts.entities._SchoolAccount;
 import com.codemovers.scholar.v1.backoffice.api.v1.serverconnections.entities.SchoolServerConnectionResponse;
 import com.codemovers.scholar.v1.backoffice.api.v1.serverconnections.entities._SchoolServerConnection;
 import java.util.Collection;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Produces;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -32,6 +40,25 @@ public class SchoolServerConnectionEndpoint extends AbstractEndpoint<_SchoolServ
     public SchoolServerConnectionEndpoint() {
         service = SchoolServerConnectionService.getInstance();
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Override
+    public SchoolServerConnectionResponse create(@HeaderParam("authentication") String authentication, _SchoolServerConnection entity) throws Exception {
+
+        try {
+            LOG.log(Level.INFO, "REACHED THE TENANT");
+            return service.create(authentication, entity);
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "CAN NOT CREATE SCHOOL SERVER CONNECTION  SUCCESFULLY {0}",
+                    ex.getMessage()
+            );
+            throw ex;
+        }
+
+    }
+
 
     @Override
     public SchoolServerConnectionResponse update(Integer id, _SchoolServerConnection entity) {
