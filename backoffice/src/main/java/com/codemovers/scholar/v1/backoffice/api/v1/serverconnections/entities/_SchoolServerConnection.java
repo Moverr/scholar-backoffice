@@ -28,6 +28,9 @@ public class _SchoolServerConnection {
     String schema_username;
     private @Mandatory
     String schema_password;
+    private @Mandatory
+    String engine_url;
+
     private Integer parent_db;
 
     public _SchoolServerConnection() {
@@ -93,6 +96,15 @@ public class _SchoolServerConnection {
         this.parent_db = parent_db;
     }
 
+    public String getEngine_url() {
+        return engine_url;
+    }
+
+    public void setEngine_url(String engine_url) {
+        this.engine_url = engine_url;
+    }
+
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -103,6 +115,7 @@ public class _SchoolServerConnection {
         hash = 41 * hash + Objects.hashCode(this.schema_username);
         hash = 41 * hash + Objects.hashCode(this.schema_password);
         hash = 41 * hash + Objects.hashCode(this.parent_db);
+        hash = 41 * hash + Objects.hashCode(this.engine_url);
         return hash;
     }
 
@@ -136,6 +149,10 @@ public class _SchoolServerConnection {
         if (!Objects.equals(this.school_account_id, other.school_account_id)) {
             return false;
         }
+        if (!Objects.equals(this.engine_url, other.engine_url)) {
+            return false;
+        }
+
         return Objects.equals(this.parent_db, other.parent_db);
     }
 
@@ -158,6 +175,7 @@ public class _SchoolServerConnection {
                 + ", schema_username=" + schema_username
                 + ", schema_password=" + schema_password
                 + ", parent_db=" + parent_db
+                + ", engine_url=" + engine_url
                 + "}";
     }
 

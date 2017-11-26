@@ -18,6 +18,7 @@ public class SchoolServerConnectionResponse {
     private String schema_name;
     private String schema_username;
     private String schema_password;
+    private String engine_url;
     private Integer parent_db;
 
     public SchoolServerConnectionResponse() {
@@ -83,6 +84,15 @@ public class SchoolServerConnectionResponse {
         this.parent_db = parent_db;
     }
 
+    public String getEngine_url() {
+        return engine_url;
+    }
+
+    public void setEngine_url(String engine_url) {
+        this.engine_url = engine_url;
+    }
+
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -93,6 +103,7 @@ public class SchoolServerConnectionResponse {
         hash = 29 * hash + Objects.hashCode(this.schema_username);
         hash = 29 * hash + Objects.hashCode(this.schema_password);
         hash = 29 * hash + Objects.hashCode(this.parent_db);
+        hash = 29 * hash + Objects.hashCode(this.engine_url);
         return hash;
     }
 
@@ -126,12 +137,24 @@ public class SchoolServerConnectionResponse {
         if (!Objects.equals(this.school_account_id, other.school_account_id)) {
             return false;
         }
+        if (!Objects.equals(this.engine_url, other.engine_url)) {
+            return false;
+        }
+
         return Objects.equals(this.parent_db, other.parent_db);
     }
 
     @Override
     public String toString() {
-        return "SchoolServerConnectionResponse{" + "id=" + id + ", school_account_id=" + school_account_id + ", schema_server=" + schema_server + ", schema_name=" + schema_name + ", schema_username=" + schema_username + ", schema_password=" + schema_password + ", parent_db=" + parent_db + '}';
+        return "SchoolServerConnectionResponse{"
+                + "id=" + id
+                + ", school_account_id=" + school_account_id
+                + ", schema_server=" + schema_server
+                + ", schema_name=" + schema_name
+                + ", schema_username=" + schema_username
+                + ", schema_password=" + schema_password
+                + ", engine_url=" + engine_url
+                + ", parent_db=" + parent_db + '}';
     }
 
 
