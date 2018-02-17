@@ -93,7 +93,7 @@ public class SchoolAccountService extends AbstractService<_SchoolAccount, School
         return populateResponse(schoolAccount);
     }
 
-    public SchoolAccount getAccountbyId(String authentication, Integer Id) throws Exception {
+    public SchoolAccount getSchoolAccountbyId(String authentication, Integer Id) throws Exception {
 
         boolean status = UserService.getInstance().validateAuthentication(authentication);
 
