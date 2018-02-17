@@ -5,7 +5,7 @@
  */
 package com.codemovers.scholar.v1.backoffice.helper.exceptions;
 
-import com.codemovers.scholar.engine.helper.Utilities;
+import com.codemovers.scholar.v1.backoffice.helper.Utilities;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.WebApplicationException;
